@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Секвойя — О компании | Доверие и экспертиза</title>
+    <!-- Google Fonts: Montserrat + Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* custom animations & parallax */
+        @keyframes slowDrift {
+            0% {
+                transform: translate(0%, 0%) scale(1.02);
+            }
+
+            100% {
+                transform: translate(-2%, -1%) scale(1);
+            }
+        }
+
+        @keyframes fadeUpStat {
+            0% {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-drift-bg {
+            animation: slowDrift 20s ease-in-out infinite alternate;
+        }
+
+        .stat-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.6s ease;
+        }
+
+        .stat-item.visible-stat {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* organic blob shape for visual container */
+        .organic-clip-video {
+            border-radius: 55% 45% 60% 40% / 50% 55% 45% 50%;
+            overflow: hidden;
+            box-shadow: 0 25px 40px -20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* parallax background layer */
+        .parallax-bg {
+            background-image: radial-gradient(circle at 10% 30%, rgba(163, 184, 154, 0.15) 0%, rgba(26, 63, 44, 0.02) 80%);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        @media (max-width: 768px) {
+            .organic-clip-video {
+                border-radius: 2.5rem;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sequoia-deep': '#18392B',
+                        'sequoia-forest': '#1A3F2C',
+                        'sequoia-moss': '#4A6B3F',
+                        'sequoia-olive': '#6B7F59',
+                        'sequoia-sage': '#A3B89A',
+                        'sequoia-cream': '#FEF9E6',
+                        'sequoia-sand': '#ECE3D0',
+                        'sequoia-earth': '#7A5C4A',
+                        'sequoia-stone': '#5E675B',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'organic-soft': '0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(107,127,89,0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-sequoia-cream font-body overflow-x-hidden antialiased">
+
+    <!-- ========== SECTION 2: ABOUT COMPANY / TRUST BLOCK ========== -->
+    <section class="relative py-20 md:py-28 lg:py-36 px-5 overflow-hidden">
+        <!-- Parallax background layer (soft landscape movement) -->
+        <div class="absolute inset-0 parallax-bg animate-drift-bg pointer-events-none">
+            <div
+                class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-sequoia-sand/20 via-transparent to-sequoia-olive/10">
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-sequoia-sage/15 to-transparent">
+            </div>
+            <!-- subtle floating leaf silhouettes -->
+            <div class="absolute top-[15%] left-[5%] w-32 h-32 opacity-10"><i
+                    class="fas fa-leaf text-7xl text-sequoia-moss"></i></div>
+            <div class="absolute bottom-[10%] right-[8%] w-24 h-24 opacity-15"><i
+                    class="fas fa-tree text-6xl text-sequoia-olive rotate-12"></i></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- asymmetric split layout: left side visual (cinematic loop) / right side content -->
+            <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+                <!-- LEFT COLUMN: Animated visual / Cinematic video loop -->
+                <div class="relative order-2 md:order-1">
+                    <div class="organic-clip-video relative bg-sequoia-forest/10 shadow-organic-soft">
+                        <!-- subtle gradient overlay to blend with site style -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-sequoia-deep/30 via-transparent to-sequoia-sage/20 mix-blend-overlay z-10 pointer-events-none rounded-inherit">
+                        </div>
+                        <!-- looped cinemagraph / landscape video (landscaping & nature) -->
+                        <video class="w-full h-full object-cover aspect-[4/3] md:aspect-square lg:aspect-[4/3] block"
+                            autoplay loop muted playsinline
+                            poster="https://placehold.co/800x800/ECE3D0/4A6B3F?text=Landscape+craft">
+                            <source src="https://cdn.pixabay.com/video/2023/06/26/170506-839949532_large.mp4"
+                                type="video/mp4">
+                            <!-- fallback image if video not supported -->
+                            <img src="https://placehold.co/800x900/ECE3D0/4A6B3F?text=Секвойя+в+работе"
+                                alt="Ландшафтные работы" class="w-full h-full object-cover">
+                        </video>
+                        <!-- subtle edge glow -->
+                        <div
+                            class="absolute inset-0 rounded-inherit shadow-inner pointer-events-none border border-sequoia-sage/30">
+                        </div>
+                    </div>
+                    <!-- floating decorative element: organic badge -->
+                    <div
+                        class="absolute -bottom-6 -right-4 md:-right-6 bg-white/80 backdrop-blur-md rounded-full p-3 shadow-lg border border-sequoia-sage/40 z-20 hidden sm:flex items-center gap-2">
+                        <i class="fas fa-award text-sequoia-moss text-xl"></i>
+                        <span class="text-sm font-semibold text-sequoia-deep">Премия "Лучший ландшафт"</span>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: Text content + key stats + mission -->
+                <div class="order-1 md:order-2 space-y-8">
+                    <!-- section intro badge -->
+                    <div class="inline-block">
+                        <span
+                            class="px-4 py-1.5 rounded-full bg-white/50 backdrop-blur-sm text-sequoia-moss text-sm font-semibold border border-sequoia-sage/40"><i
+                                class="fas fa-seedling mr-2"></i>Экологическая архитектура</span>
+                    </div>
+
+                    <h2
+                        class="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl text-sequoia-deep leading-tight tracking-tight">
+                        Создаём <span class="text-sequoia-moss">живые пространства</span> <br>с 2009 года
+                    </h2>
+
+                    <!-- short mission statement -->
+                    <div
+                        class="relative pl-4 border-l-4 border-sequoia-moss/60 bg-gradient-to-r from-sequoia-sage/5 to-transparent p-4 rounded-r-2xl">
+                        <p class="text-sequoia-stone text-lg md:text-xl italic leading-relaxed font-medium">«Мы
+                            предлагаем оптимальные решения для ваших проектов, объединяя передовые технологии и
+                            природную мудрость»</p>
+                    </div>
+
+                    <!-- STATS grid (animated on scroll) -->
+                    <div class="grid grid-cols-2 gap-6 pt-4">
+                        <!-- 15+ years -->
+                        <div
+                            class="stat-item bg-white/40 backdrop-blur-sm p-5 rounded-2xl border border-sequoia-sage/30 shadow-sm hover:shadow-md transition">
+                            <div class="flex items-center gap-2 text-sequoia-moss mb-2">
+                                <i class="fas fa-calendar-alt text-lg"></i>
+                                <span class="text-xs uppercase tracking-wider font-semibold">Опыт</span>
+                            </div>
+                            <div class="text-4xl md:text-5xl font-heading font-extrabold text-sequoia-deep">
+                                <span class="stat-number" data-target="15">0</span><span>+</span>
+                            </div>
+                            <p class="text-sequoia-stone text-sm mt-1">лет экспертизы в ландшафте</p>
+                        </div>
+                        <!-- Geographic coverage -->
+                        <div
+                            class="stat-item bg-white/40 backdrop-blur-sm p-5 rounded-2xl border border-sequoia-sage/30 shadow-sm hover:shadow-md transition">
+                            <div class="flex items-center gap-2 text-sequoia-moss mb-2">
+                                <i class="fas fa-map-marker-alt text-lg"></i>
+                                <span class="text-xs uppercase tracking-wider font-semibold">Покрытие</span>
+                            </div>
+                            <div class="text-4xl md:text-5xl font-heading font-extrabold text-sequoia-deep">
+                                <span class="stat-number" data-target="12">0</span><span>+</span>
+                            </div>
+                            <p class="text-sequoia-stone text-sm mt-1">регионов РФ, включая Чечню</p>
+                        </div>
+                        <!-- Competitions & festivals -->
+                        <div
+                            class="stat-item bg-white/40 backdrop-blur-sm p-5 rounded-2xl border border-sequoia-sage/30 shadow-sm hover:shadow-md transition">
+                            <div class="flex items-center gap-2 text-sequoia-moss mb-2">
+                                <i class="fas fa-trophy text-lg"></i>
+                                <span class="text-xs uppercase tracking-wider font-semibold">Достижения</span>
+                            </div>
+                            <div class="text-4xl md:text-5xl font-heading font-extrabold text-sequoia-deep">
+                                <span class="stat-number" data-target="18">0</span>
+                            </div>
+                            <p class="text-sequoia-stone text-sm mt-1">фестивалей и конкурсов</p>
+                        </div>
+                        <!-- Projects completed -->
+                        <div
+                            class="stat-item bg-white/40 backdrop-blur-sm p-5 rounded-2xl border border-sequoia-sage/30 shadow-sm hover:shadow-md transition">
+                            <div class="flex items-center gap-2 text-sequoia-moss mb-2">
+                                <i class="fas fa-tree text-lg"></i>
+                                <span class="text-xs uppercase tracking-wider font-semibold">Объекты</span>
+                            </div>
+                            <div class="text-4xl md:text-5xl font-heading font-extrabold text-sequoia-deep">
+                                <span class="stat-number" data-target="280">0</span><span>+</span>
+                            </div>
+                            <p class="text-sequoia-stone text-sm mt-1">реализованных проектов</p>
+                        </div>
+                    </div>
+
+                    <!-- additional trust markers (soft links) -->
+                    <div class="flex flex-wrap gap-5 pt-4 text-sequoia-stone">
+                        <div class="flex items-center gap-2"><i
+                                class="fas fa-check-circle text-sequoia-moss"></i><span>Аккредитованный питомник</span>
+                        </div>
+                        <div class="flex items-center gap-2"><i
+                                class="fas fa-leaf text-sequoia-moss"></i><span>Европейские технологии</span></div>
+                        <div class="flex items-center gap-2"><i
+                                class="fas fa-hand-sparkles text-sequoia-moss"></i><span>Гарантия 5 лет</span></div>
+                    </div>
+
+                    <!-- CTA link subtle -->
+                    <div class="pt-2">
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-sequoia-moss font-semibold border-b-2 border-sequoia-sage/40 pb-1 hover:border-sequoia-moss transition group">Узнать
+                            историю компании <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+            (function () {
+                // STATS COUNTER WITH INTERSECTION OBSERVER (fade-up + count)
+                const statNumbers = document.querySelectorAll('.stat-number');
+                const statItems = document.querySelectorAll('.stat-item');
+
+                // Function to animate counting
+                function animateNumber(element, target) {
+                    let current = 0;
+                    const step = Math.ceil(target / 45); // smooth increment
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            element.innerText = target;
+                            clearInterval(timer);
+                        } else {
+                            element.innerText = current;
+                        }
+                    }, 25);
+                }
+
+                // observer for stats visibility
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const statItem = entry.target;
+                            statItem.classList.add('visible-stat');
+                            // find inside .stat-number and start counting
+                            const numberSpan = statItem.querySelector('.stat-number');
+                            if (numberSpan && !numberSpan.dataset.animated) {
+                                const target = parseInt(numberSpan.getAttribute('data-target'), 10);
+                                if (!isNaN(target)) {
+                                    numberSpan.dataset.animated = 'true';
+                                    // start from 0
+                                    numberSpan.innerText = "0";
+                                    animateNumber(numberSpan, target);
+                                }
+                            }
+                            // unobserve after triggering
+                            observer.unobserve(statItem);
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                statItems.forEach(item => {
+                    observer.observe(item);
+                });
+
+                // Optional: for visual extra, ensure numbers start as 0 before animated
+                statNumbers.forEach(span => {
+                    const val = span.getAttribute('data-target');
+                    if (val) span.innerText = "0";
+                });
+
+                // also add a parallax motion effect to background on mousemove (gentle)
+                const section = document.querySelector('section.relative.py-20');
+                const parallaxBg = document.querySelector('.parallax-bg');
+                if (section && parallaxBg) {
+                    section.addEventListener('mousemove', (e) => {
+                        const { clientX, clientY } = e;
+                        const xPercent = (clientX / window.innerWidth) * 2 - 1;
+                        const yPercent = (clientY / window.innerHeight) * 2 - 1;
+                        const moveX = xPercent * 8;
+                        const moveY = yPercent * 5;
+                        parallaxBg.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                    });
+                    section.addEventListener('mouseleave', () => {
+                        parallaxBg.style.transform = 'translate(0px, 0px)';
+                    });
+                }
+            })();
+    </script>
+
+    <!-- additional note: video is set to autoplay loop muted; ensure browser doesn't block. Provide fallback image. -->
+</body>
+
+</html>

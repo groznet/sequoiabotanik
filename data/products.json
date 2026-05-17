@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "Туя Смарагд", "description": "Вечнозелёное хвойное, высота до 2 м", "category": "plants", "categoryName": "Растения", "price": "2 500 ₽", "oldPrice": "", "badge": "Хит", "discount": "" },
+  { "id": 2, "name": "Гортензия метельчатая", "description": "Пышное цветение с июля по октябрь", "category": "plants", "categoryName": "Растения", "price": "1 800 ₽", "oldPrice": "", "badge": "", "discount": "" },
+  { "id": 3, "name": "Клён остролистный", "description": "Крупномер 3 м, хорошая приживаемость", "category": "plants", "categoryName": "Растения", "price": "8 900 ₽", "oldPrice": "10 500 ₽", "badge": "", "discount": "15" },
+  { "id": 4, "name": "Можжевельник скальный", "description": "Стелющийся, для альпийских горок", "category": "plants", "categoryName": "Растения", "price": "1 200 ₽", "oldPrice": "", "badge": "", "discount": "" },
+  { "id": 5, "name": "Плитка тротуарная «Старый город»", "description": "Серый гранит, 30×30 см", "category": "materials", "categoryName": "Материалы", "price": "850 ₽/м²", "oldPrice": "", "badge": "", "discount": "" },
+  { "id": 6, "name": "Щебень декоративный", "description": "Фракция 5-20 мм, мешок 25 кг", "category": "materials", "categoryName": "Материалы", "price": "450 ₽", "oldPrice": "", "badge": "", "discount": "" },
+  { "id": 7, "name": "Геотекстиль садовый", "description": "Плотность 150 г/м², рулон 50 м", "category": "materials", "categoryName": "Материалы", "price": "3 200 ₽", "oldPrice": "3 800 ₽", "badge": "", "discount": "16" },
+  { "id": 8, "name": "Вазон «Тоскана»", "description": "Натуральный камень, 40×40×40 см", "category": "decor", "categoryName": "Декор", "price": "12 600 ₽", "oldPrice": "", "badge": "Хит", "discount": "" },
+  { "id": 9, "name": "Садовый светильник на солнечной батарее", "description": "Нержавеющая сталь, 30 см", "category": "decor", "categoryName": "Декор", "price": "2 400 ₽", "oldPrice": "3 000 ₽", "badge": "", "discount": "20" },
+  { "id": 10, "name": "Фонтан декоративный «Мальчик с рыбой»", "description": "Полистоун, с насосом", "category": "decor", "categoryName": "Декор", "price": "18 500 ₽", "oldPrice": "", "badge": "", "discount": "" }
+]

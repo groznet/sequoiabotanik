@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Секвойя — Проекты | Портфолио ландшафтных решений</title>
+    <!-- Google Fonts: Montserrat + Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* custom organic styles & filter animations */
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.96);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes cardFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 35px -18px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(107, 127, 89, 0.3);
+        }
+
+        .filter-btn {
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .filter-btn.active-filter {
+            background-color: #4A6B3F;
+            color: white;
+            box-shadow: 0 6px 12px -6px rgba(74, 107, 63, 0.3);
+        }
+
+        .filter-btn:not(.active-filter):hover {
+            background-color: rgba(74, 107, 63, 0.12);
+            transform: translateY(-2px);
+        }
+
+        /* organic shape variations for cards */
+        .project-card:nth-child(odd) {
+            border-radius: 45% 55% 55% 45% / 50% 50% 50% 50%;
+        }
+
+        .project-card:nth-child(even) {
+            border-radius: 55% 45% 40% 60% / 55% 45% 55% 45%;
+        }
+
+        @media (max-width: 768px) {
+
+            .project-card,
+            .project-card:nth-child(odd),
+            .project-card:nth-child(even) {
+                border-radius: 1.8rem;
+            }
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .filter-item {
+            transition: all 0.45s cubic-bezier(0.25, 0.8, 0.3, 1);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .filter-item.hidden-card {
+            display: none;
+        }
+
+        /* reveal animation when filtering */
+        .filter-item.animate-reveal {
+            animation: fadeSlideUp 0.5s ease forwards;
+        }
+
+        /* before-after badge style */
+        .ba-badge {
+            background: rgba(26, 63, 44, 0.75);
+            backdrop-filter: blur(4px);
+        }
+
+        /* custom image hover scaling */
+        .card-img-wrapper {
+            overflow: hidden;
+            border-radius: inherit;
+        }
+
+        .project-card img {
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sequoia-deep': '#18392B',
+                        'sequoia-forest': '#1A3F2C',
+                        'sequoia-moss': '#4A6B3F',
+                        'sequoia-olive': '#6B7F59',
+                        'sequoia-sage': '#A3B89A',
+                        'sequoia-cream': '#FEF9E6',
+                        'sequoia-sand': '#ECE3D0',
+                        'sequoia-earth': '#7A5C4A',
+                        'sequoia-stone': '#5E675B',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-sequoia-cream font-body antialiased">
+
+    <!-- ========== SECTION 4: ПРОЕКТЫ (PORTFOLIO BLOCK) ========== -->
+    <section class="py-24 md:py-32 px-5 relative overflow-hidden">
+        <!-- nature ambient elements -->
+        <div class="absolute top-20 right-6 w-40 h-40 opacity-10 pointer-events-none"><i
+                class="fas fa-leaf text-8xl text-sequoia-moss rotate-45"></i></div>
+        <div class="absolute bottom-10 left-4 w-32 h-32 opacity-15 pointer-events-none"><i
+                class="fas fa-seedling text-7xl text-sequoia-olive"></i></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- header -->
+            <div class="text-center mb-14 md:mb-16">
+                <span
+                    class="inline-block px-4 py-1.5 rounded-full bg-white/50 backdrop-blur-sm text-sequoia-moss text-sm font-semibold border border-sequoia-sage/30"><i
+                        class="fas fa-ruler-combined mr-2"></i>Реализованные проекты</span>
+                <h2 class="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl text-sequoia-deep mt-5">Наши
+                    <span class="text-sequoia-moss">работы</span>
+                </h2>
+                <p class="text-sequoia-stone max-w-2xl mx-auto mt-4 text-lg">Каждый проект — уникальная экосистема,
+                    созданная с душой и профессионализмом</p>
+            </div>
+
+            <!-- FILTER BUTTONS (частные / коммерческие / городские) -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button data-filter="all"
+                    class="filter-btn active-filter px-6 py-2.5 rounded-full bg-sequoia-sage/20 text-sequoia-deep font-medium transition shadow-sm text-base">Все
+                    проекты</button>
+                <button data-filter="private"
+                    class="filter-btn px-6 py-2.5 rounded-full bg-sequoia-sage/20 text-sequoia-deep font-medium transition shadow-sm text-base"><i
+                        class="fas fa-home mr-1"></i> Частные</button>
+                <button data-filter="commercial"
+                    class="filter-btn px-6 py-2.5 rounded-full bg-sequoia-sage/20 text-sequoia-deep font-medium transition shadow-sm text-base"><i
+                        class="fas fa-building mr-1"></i> Коммерческие</button>
+                <button data-filter="urban"
+                    class="filter-btn px-6 py-2.5 rounded-full bg-sequoia-sage/20 text-sequoia-deep font-medium transition shadow-sm text-base"><i
+                        class="fas fa-city mr-1"></i> Городские</button>
+            </div>
+
+            <!-- PORTFOLIO GRID (dynamic cards) -->
+            <div id="projectsGrid" class="filter-grid">
+                <!-- Project cards: 8 items (2 of them before/after) -->
+                <!-- Card 1: Частный сад (private) -->
+                <div class="project-card bg-white/70 backdrop-blur-sm border border-sequoia-sage/30 shadow-md overflow-hidden transition-all duration-300 filter-item"
+                    data-category="private">
+                    <div class="card-img-wrapper relative h-56">
+                        <img src="https://placehold.co/600x400/6B7F59/FFFFFF?text=Private+Garden" alt="Частный сад"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute top-3 right-3 bg-sequoia-forest/70 backdrop-blur text-white text-xs px-2 py-1 rounded-full">
+                            <i class="fas fa-tag mr-1"></i> частный
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-heading font-bold text-xl text-sequoia-deep">Усадьба «Зелёный мыс»</h3>
+                        <p class="text-sequoia-stone text-sm mt-1">Грозный, 2024 — зонирование, хвойный сад, водоём</p>
+                        <div class="mt-3 flex items-center gap-2 text-sequoia-moss text-xs font-semibold"><i
+                                class="fas fa-map-pin"></i><span>частная резиденция</span></div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Коммерческий объект (commercial) -->
+                <div class="project-card bg-white/70 backdrop-blur-sm border border-sequoia-sage/30 shadow-md overflow-hidden filter-item"
+                    data-category="commercial">
+                    <div class="card-img-wrapper relative h-56">
+                        <img src="https://placehold.co/600x400/A3B89A/FFFFFF?text=Business+Park" alt="Бизнес-парк"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute top-3 right-3 bg-sequoia-forest/70 backdrop-blur text-white text-xs px-2 py-1 rounded-full">
+                            <i class="fas fa-building"></i> коммерческий
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-heading font-bold text-xl text-sequoia-deep">Бизнес-центр «Олимп»</h3>
+                        <p class="text-sequoia-stone text-sm mt-1">Ландшафтный дизайн территории, парковка, сквер</p>
+                        <div class="mt-3 flex items-center gap-2 text-sequoia-moss text-xs font-semibold"><i
+                                class="fas fa-chart-line"></i><span>коммерческая зона</span></div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Городской сквер (urban) BEFORE/AFTER (до/после) style 1 -->
+                <div class="project-card bg-white/70 backdrop-blur-sm border border-sequoia-sage/30 shadow-md overflow-hidden filter-item"
+                    data-category="urban">
+                    <div class="card-img-wrapper relative h-56 flex">
+                        <div class="w-1/2 relative overflow-hidden border-r border-white/30">
+                            <div
+                                class="absolute inset-0 bg-black/30 flex items-center justify-center text-white text-xs font-bold z-10 backdrop-blur-sm">
+                                ДО</div>
+                            <img src="https://placehold.co/400x400/7A5C4A/FFFFFF?text=Before"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-1/2 relative">
+                            <div
+                                class="absolute inset-0 bg-black/30 flex items-center justify-center text-white text-xs font-bold z-10 backdrop-blur-sm">
+                                ПОСЛЕ</div>
+                            <img src="https://placehold.co/400x400/4A6B3F/FFFFFF?text=After"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2"><i
+                                class="fas fa-sync-alt text-sequoia-moss text-sm"></i><span
+                                class="text-sequoia-moss text-xs font-bold uppercase tracking-wide">До / После</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-sequoia-deep mt-1">Сквер им. Ахмата Кадырова</h3>
+                        <p class="text-sequoia-stone text-sm mt-1">Реконструкция, посадка 300+ деревьев, зоны отдыха</p>
+                        <div class="mt-2 text-sequoia-stone/80 text-xs"><i class="fas fa-city"></i> городское
+                            пространство</div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Частный участок (private) -->
+                <div class="project-card bg-white/70 backdrop-blur-sm border border-sequoia-sage/30 shadow-md overflow-hidden filter-item"
+                    data-category="private">
+                    <div class="card-img-wrapper relative h-56">
+                        <img src="https://placehold.co/600x400/6B7F59/FFFFFF?text=Estate+Design" alt="Загородный дом"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute top-3 right-3 bg-sequoia-forest/70 backdrop-blur text-white text-xs px-2 py-1 rounded-full">
+                            частный</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-heading font-bold text-xl text-sequoia-deep">Вилла «Forest Edge»</h3>
+                        <p class="text-sequoia-stone text-sm">Альпийская горка, ручей, система автополива</p>
+                        <div class="mt-3 text-sequoia-olive text-xs flex items-center gap-1"><i
+                                class="fas fa-leaf"></i><span>ландшафтный дизайн премиум</span></div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Коммерческий отель (commercial) -->
+                <div class="project-card bg-white/70 backdrop-blur-sm border border-sequoia-sage/30 shadow-md overflow-hidden filter-item"
+                    data-category="commercial">
+                    <div class="card-img-wrapper relative h-56">
+                        <img src="https://placehold.co/600x400/A3B89A/FFFFFF?text=Hotel+Landscape" alt="Отель"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute top-3 right-3 bg-sequoia-forest/70 backdrop-blur text-white text-xs px-2 py-1 rounded-full">
+                            коммерческий</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-heading font-bold text-xl text-sequoia-deep">Отель «Грозный Сити»</h3>
+                        <p class="text-sequoia-stone text-sm">Зелёная терраса, фонтаны, световой дизайн</p>
+                        <div class="mt-2 flex text-xs text-sequoia-moss"><i class="fas fa-hotel mr-1"></i>гостиничный
+                            комплекс</div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Городской парк (urban) BEFORE/AFTER (до/после) карточка №2 -->
+                <div class="project-card bg-white/70 backdrop-blur-sm border border-sequoia-sage/30 shadow-md overflow-hidden filter-item"
+                    data-category="urban">
+                    <div class="card-img-wrapper relative h-56 flex">
+                        <div class="w-1/2 relative overflow-hidden border-r border-white/30">
+                            <div
+                                class="absolute inset-0 bg-black/30 flex items-center justify-center text-white text-xs font-bold z-10 backdrop-blur-sm">
+                                ДО</div>
+                            <img src="https://placehold.co/400x400/7A5C4A/FFFFFF?text=Old+Park"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-1/2 relative">
+                            <div
+                                class="absolute inset-0 bg-black/30 flex items-center justify-center text-white text-xs font-bold z-10 backdrop-blur-sm">
+                                ПОСЛЕ</div>
+                            <img src="https://placehold.co/400x400/4A6B3F/FFFFFF?text=Renovated"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2"><i
+                                class="fas fa-sync-alt text-sequoia-moss text-sm"></i><span
+                                class="text-sequoia-moss text-xs font-bold uppercase tracking-wide">До / После</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-sequoia-deep mt-1">Парк «Цветущая долина»</h3>
+                        <p class="text-sequoia-stone text-sm">Комплексное благоустройство, амфитеатр, экотропы</p>
+                        <div class="mt-2 text-sequoia-stone/80 text-xs"><i class="fas fa-tree"></i> общественное
+                            пространство</div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Частный сад с зоной барбекю (private) -->
+                <div class="project-card bg-white/70 backdrop-blur-sm border border-sequoia-sage/30 shadow-md overflow-hidden filter-item"
+                    data-category="private">
+                    <div class="card-img-wrapper relative h-56">
+                        <img src="https://placehold.co/600x400/6B7F59/FFFFFF?text=BBQ+Zone" alt="Зона отдыха"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute top-3 right-3 bg-sequoia-forest/70 backdrop-blur text-white text-xs px-2 py-1 rounded-full">
+                            частный</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-heading font-bold text-xl text-sequoia-deep">Резиденция «Лесной угол»</h3>
+                        <p class="text-sequoia-stone text-sm">Патио, розарий, система умного полива</p>
+                        <div class="mt-3 text-sequoia-moss text-xs"><i class="fas fa-fire"></i> зона барбекю, мощёные
+                            дорожки</div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Бизнес-парк современный (commercial) -->
+                <div class="project-card bg-white/70 backdrop-blur-sm border border-sequoia-sage/30 shadow-md overflow-hidden filter-item"
+                    data-category="commercial">
+                    <div class="card-img-wrapper relative h-56">
+                        <img src="https://placehold.co/600x400/A3B89A/FFFFFF?text=Technopark" alt="Технопарк"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute top-3 right-3 bg-sequoia-forest/70 backdrop-blur text-white text-xs px-2 py-1 rounded-full">
+                            коммерческий</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-heading font-bold text-xl text-sequoia-deep">Технопарк «Грозный»</h3>
+                        <p class="text-sequoia-stone text-sm">Зелёная крыша, вертикальное озеленение, навигация</p>
+                        <div class="mt-2 text-sequoia-olive text-xs">современные экорешения</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- дополнительная CTA для портфолио -->
+            <div class="text-center mt-14">
+                <a href="#"
+                    class="inline-flex items-center gap-2 text-sequoia-moss hover:text-sequoia-deep font-semibold border-b-2 border-sequoia-sage/40 pb-1 transition-all group">Смотреть
+                    все проекты <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+            (function () {
+                // Filter functionality for projects (private/commercial/urban)
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const projectsGrid = document.getElementById('projectsGrid');
+                const projectItems = Array.from(document.querySelectorAll('.filter-item'));
+
+                // initialize: set all visible and with animation class
+                function filterProjects(category) {
+                    // update active button style
+                    filterButtons.forEach(btn => {
+                        if (btn.getAttribute('data-filter') === category) {
+                            btn.classList.add('active-filter');
+                        } else {
+                            btn.classList.remove('active-filter');
+                        }
+                    });
+
+                    // filter and animate
+                    projectItems.forEach((item, idx) => {
+                        const itemCategory = item.getAttribute('data-category');
+                        if (category === 'all' || itemCategory === category) {
+                            // show item
+                            item.classList.remove('hidden-card');
+                            // add sequential delay for organic reveal
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                                item.classList.add('animate-reveal');
+                            }, idx * 30);
+                        } else {
+                            item.classList.add('hidden-card');
+                            item.classList.remove('animate-reveal');
+                        }
+                    });
+                    // reorder visibility: ensure hidden items don't occupy space
+                    setTimeout(() => {
+                        // force layout
+                    }, 50);
+                }
+
+                // attach event listeners
+                filterButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const category = btn.getAttribute('data-filter');
+                        filterProjects(category);
+                    });
+                });
+
+                // initial animation for cards (on load)
+                function initReveal() {
+                    projectItems.forEach((item, i) => {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.97)';
+                        setTimeout(() => {
+                            item.style.transition = 'all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                            item.classList.add('animate-reveal');
+                        }, i * 60);
+                    });
+                }
+                initReveal();
+
+                // for before/after cards we make sure the images are accessible, no extra js needed.
+                // Add subtle hover parallax effect on inner images optional (light)
+                const cards = document.querySelectorAll('.project-card');
+                cards.forEach(card => {
+                    card.addEventListener('mouseenter', (e) => {
+                        const imgWrapper = card.querySelector('.card-img-wrapper');
+                        if (imgWrapper) {
+                            const img = imgWrapper.querySelector('img');
+                            if (img) img.style.transform = 'scale(1.02)';
+                        }
+                    });
+                    card.addEventListener('mouseleave', (e) => {
+                        const imgWrapper = card.querySelector('.card-img-wrapper');
+                        if (imgWrapper) {
+                            const img = imgWrapper.querySelector('img');
+                            if (img) img.style.transform = 'scale(1)';
+                        }
+                    });
+                });
+            })();
+    </script>
+
+    <!-- ensure responsive grid adaptation: custom breakpoints fine -->
+    <style>
+        @media (max-width: 640px) {
+            .filter-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .filter-btn {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        .animate-reveal {
+            animation: fadeSlideUp 0.45s ease forwards;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</body>
+
+</html>

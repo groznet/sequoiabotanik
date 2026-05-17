@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Секвойя — ландшафтная компания. Благоустройство и озеленение частных, коммерческих и городских территорий в Чечне и других регионах России. Более 15 лет опыта.">
+    <meta name="theme-color" content="#1F3D2B">
+    <title>Секвойя — Архитектура Ландшафта | Благоустройство и Озеленение</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1F3D2B',
+                        secondary: '#4C7A5A',
+                        accent: '#D6A85A',
+                        background: '#F7F9F5',
+                        surface: '#FFFFFF',
+                        text: '#1A1A1A',
+                        muted: '#7A807A',
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        sm: '0.25rem',
+                        md: '0.5rem',
+                        lg: '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                        full: '9999px',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'slide-down': 'slideDown 0.4s ease-out forwards',
+                        'scale-in': 'scaleIn 0.4s ease-out forwards',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F9F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4C7A5A;
+            border-radius: 3px;
+        }
+        /* Mega menu transition */
+        .mega-menu {
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+        .mega-menu-trigger:hover .mega-menu,
+        .mega-menu-trigger:focus-within .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        /* Before/After slider */
+        .before-after-slider {
+            position: relative;
+            overflow: hidden;
+            cursor: ew-resize;
+            user-select: none;
+        }
+        .before-after-slider .after-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2;
+        }
+        .before-after-slider .after-layer img,
+        .before-after-slider .after-layer .bg-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (min-width: 768px) {
+            .before-after-slider .after-layer img,
+            .before-after-slider .after-layer .bg-placeholder {
+                width: 200%;
+            }
+        }
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #D6A85A;
+            z-index: 3;
+            cursor: ew-resize;
+            transform: translateX(-50%);
+            transition: left 0.05s linear;
+        }
+        .slider-handle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #D6A85A;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+            z-index: 4;
+        }
+        .slider-handle-arrows {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            pointer-events: none;
+            display: flex;
+            gap: 6px;
+        }
+        .slider-handle-arrows span {
+            color: #1F3D2B;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1;
+        }
+        /* Testimonial dots */
+        .testimonial-dot.active {
+            background-color: #1F3D2B;
+            width: 28px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-body bg-background text-text antialiased">
+
+    <!-- ==================== HEADER / NAVIGATION ==================== -->
+    <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent" role="banner">
+        <div id="header-inner" class="transition-all duration-300">
+            <!-- Top bar -->
+            <div class="hidden lg:block bg-primary/90 backdrop-blur-sm text-white text-sm py-2 px-4 transition-all duration-300" id="top-bar">
+                <div class="max-w-7xl mx-auto flex items-center justify-between">
+                    <div class="flex items-center gap-6 text-white/85">
+                        <a href="tel:+78001234567" class="hover:text-accent transition-colors flex items-center gap-1.5" aria-label="Позвонить">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            +7 (800) 123-45-67
+                        </a>
+                        <a href="mailto:info@sequoya.ru" class="hover:text-accent transition-colors flex items-center gap-1.5" aria-label="Написать email">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            info@sequoya.ru
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-white/70 flex items-center gap-1">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
+                            ул. Асланбека Шерипова, 61, Грозный
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main nav bar -->
+            <div class="bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300" id="main-nav-bar">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16 lg:h-20">
+                        <!-- Logo -->
+                        <a href="/" class="flex items-center gap-2 flex-shrink-0 z-10" aria-label="Секвойя — на главную">
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D6A85A" stroke-width="2.5" stroke-linecap="round">
+                                    <path d="M12 2L2 22h20L12 2z"/>
+                                    <path d="M12 22V12"/>
+                                    <path d="M7 17h10"/>
+                                </svg>
+                            </div>
+                            <span class="font-heading text-xl lg:text-2xl font-bold text-primary tracking-tight">Секвойя</span>
+                        </a>
+
+                        <!-- Desktop Nav -->
+                        <nav class="hidden lg:flex items-center gap-1" aria-label="Основная навигация">
+                            <!-- Mega Menu: Услуги -->
+                            <div class="mega-menu-trigger relative">
+                                <a href="/services" class="px-3 py-2 rounded-lg text-text/80 hover:text-primary hover:bg-background transition-colors font-medium text-sm flex items-center gap-1">
+                                    Услуги
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                                </a>
+                                <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[720px] bg-surface rounded-2xl shadow-xl border border-gray-100 opacity-0 invisible translate-y-2 z-50 p-6" role="region" aria-label="Меню услуг">
+                                    <div class="grid grid-cols-4 gap-6">
+                                        <div>
+                                            <h4 class="font-heading text-sm font-semibold text-primary mb-3 uppercase tracking-wide">Благоустройство</h4>
+                                            <ul class="space-y-2">
+                                                <li><a href="/service/landscaping" class="text-sm text-muted hover:text-primary transition-colors">Ландшафтное проектирование</a></li>
+                                                <li><a href="/service/terracing" class="text-sm text-muted hover:text-primary transition-colors">Террасирование участков</a></li>
+                                                <li><a href="/service/drainage" class="text-sm text-muted hover:text-primary transition-colors">Дренажные системы</a></li>
+                                                <li><a href="/service/paving" class="text-sm text-muted hover:text-primary transition-colors">Мощение дорожек</a></li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-heading text-sm font-semibold text-primary mb-3 uppercase tracking-wide">Озеленение</h4>
+                                            <ul class="space-y-2">
+                                                <li><a href="/service/planting" class="text-sm text-muted hover:text-primary transition-colors">Посадка растений</a></li>
+                                                <li><a href="/service/lawns" class="text-sm text-muted hover:text-primary transition-colors">Устройство газонов</a></li>
+                                                <li><a href="/service/vertical-gardens" class="text-sm text-muted hover:text-primary transition-colors">Вертикальное озеленение</a></li>
+                                                <li><a href="/service/rock-gardens" class="text-sm text-muted hover:text-primary transition-colors">Альпинарии и рокарии</a></li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-heading text-sm font-semibold text-primary mb-3 uppercase tracking-wide">Водные объекты</h4>
+                                            <ul class="space-y-2">
+                                                <li><a href="/service/ponds" class="text-sm text-muted hover:text-primary transition-colors">Пруды и водоёмы</a></li>
+                                                <li><a href="/service/fountains" class="text-sm text-muted hover:text-primary transition-colors">Фонтаны</a></li>
+                                                <li><a href="/service/waterfalls" class="text-sm text-muted hover:text-primary transition-colors">Водопады и ручьи</a></li>
+                                                <li><a href="/service/irrigation" class="text-sm text-muted hover:text-primary transition-colors">Системы полива</a></li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-heading text-sm font-semibold text-primary mb-3 uppercase tracking-wide">Декор</h4>
+                                            <ul class="space-y-2">
+                                                <li><a href="/service/lighting" class="text-sm text-muted hover:text-primary transition-colors">Ландшафтное освещение</a></li>
+                                                <li><a href="/service/gazebos" class="text-sm text-muted hover:text-primary transition-colors">Беседки и перголы</a></li>
+                                                <li><a href="/service/sculptures" class="text-sm text-muted hover:text-primary transition-colors">Садовые скульптуры</a></li>
+                                                <li><a href="/service/fences" class="text-sm text-muted hover:text-primary transition-colors">Декоративные ограждения</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 pt-4 border-t border-gray-100 text-center">
+                                        <a href="/services" class="text-sm font-medium text-accent hover:text-primary transition-colors">Все услуги →</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/projects" class="px-3 py-2 rounded-lg text-text/80 hover:text-primary hover:bg-background transition-colors font-medium text-sm">Проекты</a>
+                            <a href="/products" class="px-3 py-2 rounded-lg text-text/80 hover:text-primary hover:bg-background transition-colors font-medium text-sm">Каталог</a>
+                            <a href="/before-after" class="px-3 py-2 rounded-lg text-text/80 hover:text-primary hover:bg-background transition-colors font-medium text-sm">До & После</a>
+                            <a href="/about" class="px-3 py-2 rounded-lg text-text/80 hover:text-primary hover:bg-background transition-colors font-medium text-sm">О нас</a>
+                            <a href="/blog" class="px-3 py-2 rounded-lg text-text/80 hover:text-primary hover:bg-background transition-colors font-medium text-sm">Блог</a>
+                            <a href="/contact" class="px-3 py-2 rounded-lg text-text/80 hover:text-primary hover:bg-background transition-colors font-medium text-sm">Контакты</a>
+                        </nav>
+
+                        <!-- Desktop CTA -->
+                        <div class="hidden lg:flex items-center gap-3 flex-shrink-0">
+                            <a href="/contact" class="inline-flex items-center gap-2 bg-accent text-white font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-primary transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
+                                Связаться
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+
+                        <!-- Mobile Hamburger -->
+                        <button id="mobile-menu-btn" class="lg:hidden z-50 p-2 rounded-lg hover:bg-background transition-colors" aria-label="Открыть меню" aria-expanded="false">
+                            <svg id="menu-icon-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2.5">
+                                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                            </svg>
+                            <svg id="menu-icon-close" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2.5" class="hidden">
+                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-white z-40 lg:hidden transform translate-x-full transition-transform duration-400 ease-in-out flex flex-col pt-20 pb-6 px-6 overflow-y-auto" aria-hidden="true">
+            <nav class="flex flex-col gap-1" aria-label="Мобильная навигация">
+                <div class="border-b border-gray-100 pb-3 mb-2">
+                    <button id="mobile-services-toggle" class="w-full flex items-center justify-between py-3 px-2 text-left font-heading text-lg font-semibold text-primary" aria-expanded="false">
+                        Услуги
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transition-transform duration-300" id="mobile-services-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div id="mobile-services-submenu" class="hidden pl-4 space-y-1 border-l-2 border-accent/30 ml-2">
+                        <a href="/services" class="block py-2 text-sm text-muted hover:text-primary">Все услуги</a>
+                        <a href="/service/landscaping" class="block py-2 text-sm text-muted hover:text-primary">Ландшафтное проектирование</a>
+                        <a href="/service/lawns" class="block py-2 text-sm text-muted hover:text-primary">Устройство газонов</a>
+                        <a href="/service/planting" class="block py-2 text-sm text-muted hover:text-primary">Посадка растений</a>
+                        <a href="/service/ponds" class="block py-2 text-sm text-muted hover:text-primary">Пруды и водоёмы</a>
+                        <a href="/service/lighting" class="block py-2 text-sm text-muted hover:text-primary">Ландшафтное освещение</a>
+                    </div>
+                </div>
+                <a href="/projects" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">Проекты</a>
+                <a href="/products" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">Каталог товаров</a>
+                <a href="/before-after" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">До & После</a>
+                <a href="/about" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">О питомнике</a>
+                <a href="/blog" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">Статьи</a>
+                <a href="/events" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">События</a>
+                <a href="/testimonials" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">Отзывы</a>
+                <a href="/promotions" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">Акции</a>
+                <a href="/faq" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">ЧАВО</a>
+                <a href="/contact" class="py-3 px-2 font-heading text-lg font-semibold text-primary border-b border-gray-100">Контакты</a>
+            </nav>
+            <div class="mt-8 flex flex-col gap-3">
+                <a href="tel:+78001234567" class="flex items-center gap-3 text-text hover:text-primary transition-colors py-2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    +7 (800) 123-45-67
+                </a>
+                <a href="/contact" class="w-full inline-flex items-center justify-center gap-2 bg-accent text-white font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 shadow-md">
+                    Связаться с нами
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main id="main-content" role="main">
+
+        <!-- ========== HERO SECTION ========== -->
+        <section class="relative min-h-screen flex items-center overflow-hidden" aria-labelledby="hero-heading">
+            <!-- Background gradient layers -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-secondary"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(214,168,90,0.15),transparent_60%)]"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(76,122,90,0.3),transparent_50%)]"></div>
+                <!-- Decorative pattern overlay -->
+                <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M30 5 Q35 20 30 35 Q25 50 30 55\' fill=\'none\' stroke=\'%23ffffff\' stroke-width=\'0.5\'/%3E%3Ccircle cx=\'30\' cy=\'30\' r=\'1.5\' fill=\'%23ffffff\'/%3E%3C/svg%3E'); background-size: 80px 80px;"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40 w-full">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div class="text-white">
+                        <span class="inline-block text-accent font-medium text-sm tracking-widest uppercase mb-4 animate-fade-in">Архитектура Ландшафта</span>
+                        <h1 id="hero-heading" class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6 animate-slide-up" style="animation-delay: 0.1s;">
+                            Создаём <span class="text-accent italic">красоту</span><br>вокруг вас
+                        </h1>
+                        <p class="text-white/75 text-lg sm:text-xl max-w-lg mb-8 animate-slide-up" style="animation-delay: 0.2s;">
+                            Более 15 лет мы выполняем благоустройство и озеленение частных, коммерческих и городских территорий в Чечне и по всей России.
+                        </p>
+                        <div class="flex flex-wrap gap-4 animate-slide-up" style="animation-delay: 0.35s;">
+                            <a href="/services" class="inline-flex items-center gap-2 bg-accent text-white font-semibold px-7 py-3.5 rounded-full hover:bg-white hover:text-primary transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-base">
+                                Наши услуги
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                            <a href="/projects" class="inline-flex items-center gap-2 border-2 border-white/30 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-white/10 hover:border-white/60 transition-all duration-300 text-base">
+                                Смотреть проекты
+                            </a>
+                        </div>
+                        <!-- Stats -->
+                        <div class="flex flex-wrap gap-8 mt-10 pt-8 border-t border-white/15 animate-slide-up" style="animation-delay: 0.45s;">
+                            <div>
+                                <span class="block font-heading text-3xl font-bold text-accent">15+</span>
+                                <span class="text-white/60 text-sm">лет опыта</span>
+                            </div>
+                            <div>
+                                <span class="block font-heading text-3xl font-bold text-accent">300+</span>
+                                <span class="text-white/60 text-sm">проектов</span>
+                            </div>
+                            <div>
+                                <span class="block font-heading text-3xl font-bold text-accent">50+</span>
+                                <span class="text-white/60 text-sm">наград</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hero visual -->
+                    <div class="hidden lg:block relative animate-scale-in" style="animation-delay: 0.3s;">
+                        <div class="relative w-full aspect-[4/5] max-w-md mx-auto">
+                            <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent/20 to-secondary/30 border border-white/10 backdrop-blur-sm overflow-hidden shadow-2xl">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <svg width="120" height="160" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-90">
+                                        <ellipse cx="60" cy="130" rx="50" ry="20" fill="rgba(214,168,90,0.2)"/>
+                                        <rect x="48" y="60" width="24" height="70" rx="4" fill="rgba(255,255,255,0.15)"/>
+                                        <circle cx="60" cy="30" r="30" fill="rgba(76,122,90,0.5)"/>
+                                        <circle cx="45" cy="20" r="22" fill="rgba(31,61,43,0.6)"/>
+                                        <circle cx="72" cy="22" r="20" fill="rgba(76,122,90,0.55)"/>
+                                        <circle cx="58" cy="10" r="18" fill="rgba(31,61,43,0.5)"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- Floating badge -->
+                            <div class="absolute -bottom-4 -right-4 bg-surface rounded-2xl shadow-xl p-4 flex items-center gap-3 animate-float">
+                                <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-xs text-muted">Европейские</span>
+                                    <span class="block text-sm font-semibold text-primary">технологии</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-float">
+                <a href="#services" class="flex flex-col items-center gap-2 text-white/50 hover:text-accent transition-colors" aria-label="Прокрутить вниз">
+                    <span class="text-xs tracking-widest uppercase">Листайте</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- ========== SERVICES OVERVIEW ========== -->
+        <section id="services" class="py-20 lg:py-28 bg-surface" aria-labelledby="services-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <span class="text-accent font-medium text-sm tracking-widest uppercase">Что мы предлагаем</span>
+                    <h2 id="services-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mt-3 mb-4">Наши услуги</h2>
+                    <p class="text-muted max-w-xl mx-auto text-lg">Полный спектр услуг по благоустройству и озеленению — от проектирования до воплощения</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                    <!-- Service Card 1 -->
+                    <article class="group bg-background rounded-2xl p-6 lg:p-8 hover:bg-primary hover:text-white transition-all duration-500 cursor-pointer shadow-sm hover:shadow-xl border border-transparent hover:border-primary">
+                        <div class="w-14 h-14 rounded-full bg-accent/20 group-hover:bg-accent/30 flex items-center justify-center mb-5 transition-colors duration-500">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2" class="group-hover:stroke-white transition-colors duration-500"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-semibold text-primary group-hover:text-white mb-3 transition-colors duration-500">Ландшафтное проектирование</h3>
+                        <p class="text-muted group-hover:text-white/70 text-sm leading-relaxed transition-colors duration-500">Разработка индивидуальных проектов с учётом особенностей участка и пожеланий клиента.</p>
+                        <span class="inline-block mt-4 text-sm font-medium text-accent group-hover:text-accent transition-colors">Подробнее →</span>
+                    </article>
+                    <!-- Service Card 2 -->
+                    <article class="group bg-background rounded-2xl p-6 lg:p-8 hover:bg-primary hover:text-white transition-all duration-500 cursor-pointer shadow-sm hover:shadow-xl border border-transparent hover:border-primary">
+                        <div class="w-14 h-14 rounded-full bg-accent/20 group-hover:bg-accent/30 flex items-center justify-center mb-5 transition-colors duration-500">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2" class="group-hover:stroke-white transition-colors duration-500"><path d="M12 2L2 22h20L12 2z"/><path d="M12 22V12"/></svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-semibold text-primary group-hover:text-white mb-3 transition-colors duration-500">Озеленение территорий</h3>
+                        <p class="text-muted group-hover:text-white/70 text-sm leading-relaxed transition-colors duration-500">Посадка деревьев, кустарников, создание цветников и зелёных композиций любой сложности.</p>
+                        <span class="inline-block mt-4 text-sm font-medium text-accent group-hover:text-accent transition-colors">Подробнее →</span>
+                    </article>
+                    <!-- Service Card 3 -->
+                    <article class="group bg-background rounded-2xl p-6 lg:p-8 hover:bg-primary hover:text-white transition-all duration-500 cursor-pointer shadow-sm hover:shadow-xl border border-transparent hover:border-primary">
+                        <div class="w-14 h-14 rounded-full bg-accent/20 group-hover:bg-accent/30 flex items-center justify-center mb-5 transition-colors duration-500">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2" class="group-hover:stroke-white transition-colors duration-500"><path d="M2 12h20"/><path d="M12 2v20"/><circle cx="12" cy="12" r="4"/></svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-semibold text-primary group-hover:text-white mb-3 transition-colors duration-500">Водные объекты</h3>
+                        <p class="text-muted group-hover:text-white/70 text-sm leading-relaxed transition-colors duration-500">Создание прудов, фонтанов, водопадов и ручьёв с системами фильтрации и подсветки.</p>
+                        <span class="inline-block mt-4 text-sm font-medium text-accent group-hover:text-accent transition-colors">Подробнее →</span>
+                    </article>
+                    <!-- Service Card 4 -->
+                    <article class="group bg-background rounded-2xl p-6 lg:p-8 hover:bg-primary hover:text-white transition-all duration-500 cursor-pointer shadow-sm hover:shadow-xl border border-transparent hover:border-primary">
+                        <div class="w-14 h-14 rounded-full bg-accent/20 group-hover:bg-accent/30 flex items-center justify-center mb-5 transition-colors duration-500">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2" class="group-hover:stroke-white transition-colors duration-500"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-semibold text-primary group-hover:text-white mb-3 transition-colors duration-500">Ландшафтное освещение</h3>
+                        <p class="text-muted group-hover:text-white/70 text-sm leading-relaxed transition-colors duration-500">Профессиональная подсветка сада, дорожек и архитектурных элементов для вечерней атмосферы.</p>
+                        <span class="inline-block mt-4 text-sm font-medium text-accent group-hover:text-accent transition-colors">Подробнее →</span>
+                    </article>
+                </div>
+                <div class="text-center mt-10">
+                    <a href="/services" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors">
+                        Все услуги
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ABOUT SNIPPET ========== -->
+        <section class="py-20 lg:py-28 bg-background" aria-labelledby="about-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div class="relative">
+                        <div class="aspect-[4/3] rounded-3xl bg-gradient-to-br from-primary/10 via-secondary/20 to-accent/15 overflow-hidden relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg width="100" height="140" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-80">
+                                    <rect x="35" y="50" width="30" height="80" rx="5" fill="rgba(31,61,43,0.4)"/>
+                                    <circle cx="50" cy="25" r="28" fill="rgba(76,122,90,0.5)"/>
+                                    <circle cx="35" cy="18" r="20" fill="rgba(31,61,43,0.55)"/>
+                                    <circle cx="62" cy="20" r="18" fill="rgba(76,122,90,0.5)"/>
+                                    <ellipse cx="50" cy="125" rx="40" ry="12" fill="rgba(214,168,90,0.25)"/>
+                                </svg>
+                            </div>
+                            <!-- Badge -->
+                            <div class="absolute top-4 right-4 bg-surface rounded-xl shadow-lg px-4 py-3">
+                                <span class="block font-heading text-2xl font-bold text-primary">15+</span>
+                                <span class="text-xs text-muted">лет опыта</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-accent font-medium text-sm tracking-widest uppercase">О компании</span>
+                        <h2 id="about-heading" class="font-heading text-3xl sm:text-4xl font-bold text-primary mt-3 mb-5">«Секвойя» — архитектура ландшафта с душой</h2>
+                        <p class="text-muted leading-relaxed mb-4">
+                            Ландшафтная компания <strong class="text-primary">«Секвойя»</strong> уже более 15 лет выполняет благоустройство и озеленение частных, коммерческих и городских территорий в Чечне и других регионах России.
+                        </p>
+                        <p class="text-muted leading-relaxed mb-6">
+                            Мы регулярно участвуем в конкурсах и фестивалях садово-паркового искусства, подтверждая высокий уровень профессионализма и креативного подхода. Наш принцип: <em class="text-primary font-medium">«Мы предлагаем оптимальные решения для ваших проектов»</em>.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="/about" class="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-full hover:bg-secondary transition-all duration-300 shadow-md hover:shadow-lg">
+                                Узнать больше
+                            </a>
+                            <a href="/testimonials" class="inline-flex items-center gap-2 border-2 border-primary/20 text-primary font-semibold px-6 py-3 rounded-full hover:bg-primary hover:text-white transition-all duration-300">
+                                Отзывы клиентов
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PROJECTS SHOWCASE ========== -->
+        <section class="py-20 lg:py-28 bg-surface" aria-labelledby="projects-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14">
+                    <div>
+                        <span class="text-accent font-medium text-sm tracking-widest uppercase">Портфолио</span>
+                        <h2 id="projects-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mt-3">Реализованные проекты</h2>
+                    </div>
+                    <a href="/projects" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors flex-shrink-0">
+                        Все проекты
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    <!-- Project Card 1 -->
+                    <article class="group rounded-2xl overflow-hidden bg-background shadow-sm hover:shadow-xl transition-all duration-400 cursor-pointer">
+                        <div class="aspect-[4/3] bg-gradient-to-br from-primary/20 to-secondary/30 relative overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-60 group-hover:opacity-80 transition-opacity">
+                                <svg width="60" height="80" viewBox="0 0 60 80" fill="none"><rect x="15" y="30" width="30" height="45" rx="3" fill="rgba(31,61,43,0.5)"/><circle cx="30" cy="15" r="16" fill="rgba(76,122,90,0.55)"/></svg>
+                            </div>
+                            <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-400"></div>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-accent font-medium uppercase tracking-wider">Частный участок</span>
+                            <h3 class="font-heading text-lg font-semibold text-primary mt-1 mb-2">Загородный сад в Аргуне</h3>
+                            <p class="text-muted text-sm line-clamp-2">Полное благоустройство территории 20 соток с прудом и зоной отдыха.</p>
+                        </div>
+                    </article>
+                    <!-- Project Card 2 -->
+                    <article class="group rounded-2xl overflow-hidden bg-background shadow-sm hover:shadow-xl transition-all duration-400 cursor-pointer">
+                        <div class="aspect-[4/3] bg-gradient-to-br from-secondary/20 to-accent/20 relative overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-60 group-hover:opacity-80 transition-opacity">
+                                <svg width="60" height="80" viewBox="0 0 60 80" fill="none"><rect x="10" y="25" width="40" height="50" rx="4" fill="rgba(31,61,43,0.45)"/><circle cx="30" cy="12" r="14" fill="rgba(76,122,90,0.5)"/><rect x="22" y="55" width="16" height="20" rx="2" fill="rgba(214,168,90,0.4)"/></svg>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-accent font-medium uppercase tracking-wider">Коммерческий</span>
+                            <h3 class="font-heading text-lg font-semibold text-primary mt-1 mb-2">Озеленение бизнес-центра</h3>
+                            <p class="text-muted text-sm line-clamp-2">Ландшафтный дизайн территории бизнес-центра в Грозном с системой автополива.</p>
+                        </div>
+                    </article>
+                    <!-- Project Card 3 -->
+                    <article class="group rounded-2xl overflow-hidden bg-background shadow-sm hover:shadow-xl transition-all duration-400 cursor-pointer">
+                        <div class="aspect-[4/3] bg-gradient-to-br from-primary/15 to-accent/25 relative overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-60 group-hover:opacity-80 transition-opacity">
+                                <svg width="60" height="80" viewBox="0 0 60 80" fill="none"><ellipse cx="30" cy="55" rx="28" ry="18" fill="rgba(76,122,90,0.35)"/><rect x="20" y="20" width="20" height="40" rx="3" fill="rgba(31,61,43,0.5)"/><circle cx="30" cy="10" r="10" fill="rgba(76,122,90,0.55)"/></svg>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-accent font-medium uppercase tracking-wider">Городской</span>
+                            <h3 class="font-heading text-lg font-semibold text-primary mt-1 mb-2">Парковая зона в Грозном</h3>
+                            <p class="text-muted text-sm line-clamp-2">Реконструкция городского сквера с фонтаном и декоративным освещением.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== BEFORE & AFTER TEASER ========== -->
+        <section class="py-20 lg:py-28 bg-background" aria-labelledby="before-after-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <span class="text-accent font-medium text-sm tracking-widest uppercase">До и После</span>
+                    <h2 id="before-after-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mt-3 mb-4">Преображение пространства</h2>
+                    <p class="text-muted max-w-xl mx-auto text-lg">Посмотрите, как меняются участки после нашей работы</p>
+                </div>
+                <!-- Interactive Before/After Slider -->
+                <div class="max-w-3xl mx-auto">
+                    <div class="before-after-slider relative rounded-3xl overflow-hidden shadow-xl aspect-[16/10] sm:aspect-[16/9] bg-gray-200" id="before-after-container" aria-label="Интерактивное сравнение до и после">
+                        <!-- Before layer (full width, visible on right side) -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center">
+                            <span class="text-white/80 font-heading text-2xl sm:text-4xl font-bold tracking-wider drop-shadow-lg">ДО</span>
+                            <div class="absolute bottom-4 left-4 bg-black/50 text-white text-xs px-3 py-1 rounded-full">Исходное состояние</div>
+                        </div>
+                        <!-- After layer (clipped, visible on left side) -->
+                        <div class="after-layer" id="after-layer" style="width: 50%;">
+                            <div class="absolute inset-0 bg-gradient-to-br from-secondary/80 to-primary flex items-center justify-center" style="width: 200%;">
+                                <span class="text-white/90 font-heading text-2xl sm:text-4xl font-bold tracking-wider drop-shadow-lg">ПОСЛЕ</span>
+                                <div class="absolute bottom-4 right-4 bg-accent/80 text-white text-xs px-3 py-1 rounded-full">Результат</div>
+                            </div>
+                        </div>
+                        <!-- Slider handle -->
+                        <div class="slider-handle" id="slider-handle" style="left: 50%;" role="slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" tabindex="0" aria-label="Ползунок сравнения">
+                            <div class="slider-handle-arrows">
+                                <span>◂</span><span>▸</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-6">
+                        <a href="/before-after" class="inline-flex items-center gap-2 bg-accent text-white font-semibold px-7 py-3 rounded-full hover:bg-primary transition-all duration-300 shadow-md hover:shadow-lg">
+                            Смотреть галерею
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PRODUCTS CATALOG TEASER ========== -->
+        <section class="py-20 lg:py-28 bg-surface" aria-labelledby="products-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <span class="text-accent font-medium text-sm tracking-widest uppercase">Каталог</span>
+                    <h2 id="products-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mt-3 mb-4">Растения, материалы, декор</h2>
+                    <p class="text-muted max-w-xl mx-auto text-lg">Всё необходимое для вашего сада и участка в одном месте</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <a href="/products/plants" class="group block bg-background rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-transparent hover:border-accent/30">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-accent/15 flex items-center justify-center mb-4 group-hover:bg-accent/25 transition-colors">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="1.8"><path d="M12 2L2 22h20L12 2z"/></svg>
+                        </div>
+                        <h3 class="font-heading text-lg font-semibold text-primary">Растения</h3>
+                        <p class="text-muted text-sm mt-1">Деревья, кустарники, цветы</p>
+                    </a>
+                    <a href="/products/materials" class="group block bg-background rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-transparent hover:border-accent/30">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-accent/15 flex items-center justify-center mb-4 group-hover:bg-accent/25 transition-colors">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="3" x2="6" y2="6"/><line x1="18" y1="3" x2="18" y2="6"/></svg>
+                        </div>
+                        <h3 class="font-heading text-lg font-semibold text-primary">Материалы</h3>
+                        <p class="text-muted text-sm mt-1">Грунты, мульча, удобрения</p>
+                    </a>
+                    <a href="/products/decor" class="group block bg-background rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-transparent hover:border-accent/30">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-accent/15 flex items-center justify-center mb-4 group-hover:bg-accent/25 transition-colors">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <h3 class="font-heading text-lg font-semibold text-primary">Декор</h3>
+                        <p class="text-muted text-sm mt-1">Скульптуры, вазоны, камни</p>
+                    </a>
+                    <a href="/products/lighting" class="group block bg-background rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-transparent hover:border-accent/30">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-accent/15 flex items-center justify-center mb-4 group-hover:bg-accent/25 transition-colors">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/></svg>
+                        </div>
+                        <h3 class="font-heading text-lg font-semibold text-primary">Освещение</h3>
+                        <p class="text-muted text-sm mt-1">Светильники для сада</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== TESTIMONIALS CAROUSEL ========== -->
+        <section class="py-20 lg:py-28 bg-background" aria-labelledby="testimonials-heading">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <span class="text-accent font-medium text-sm tracking-widest uppercase">Отзывы</span>
+                    <h2 id="testimonials-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mt-3 mb-4">Что говорят клиенты</h2>
+                </div>
+                <div class="relative overflow-hidden" id="testimonials-carousel">
+                    <div class="flex transition-transform duration-500 ease-in-out" id="testimonials-track">
+                        <!-- Testimonial 1 -->
+                        <div class="w-full flex-shrink-0 px-4">
+                            <blockquote class="bg-surface rounded-3xl p-8 lg:p-10 shadow-md text-center">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="rgba(214,168,90,0.3)" class="mx-auto mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151C7.563 6.068 6 8.789 6 11h4v10H0z"/></svg>
+                                <p class="text-text/80 text-lg leading-relaxed mb-6 italic">«Обратились в Секвойю для благоустройства загородного участка. Ребята сделали потрясающий проект, учли все пожелания. Теперь наш сад — любимое место отдыха всей семьи!»</p>
+                                <footer>
+                                    <span class="block font-heading text-lg font-semibold text-primary">Мадина Исаева</span>
+                                    <span class="text-muted text-sm">Частный клиент, Грозный</span>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <!-- Testimonial 2 -->
+                        <div class="w-full flex-shrink-0 px-4">
+                            <blockquote class="bg-surface rounded-3xl p-8 lg:p-10 shadow-md text-center">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="rgba(214,168,90,0.3)" class="mx-auto mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151C7.563 6.068 6 8.789 6 11h4v10H0z"/></svg>
+                                <p class="text-text/80 text-lg leading-relaxed mb-6 italic">«Как владелец ресторана, я ценю качество и сроки. Секвойя озеленила нашу летнюю террасу за 2 недели — результат превзошёл ожидания. Гости в восторге!»</p>
+                                <footer>
+                                    <span class="block font-heading text-lg font-semibold text-primary">Руслан Дадаев</span>
+                                    <span class="text-muted text-sm">Ресторан «Башня», Грозный</span>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <!-- Testimonial 3 -->
+                        <div class="w-full flex-shrink-0 px-4">
+                            <blockquote class="bg-surface rounded-3xl p-8 lg:p-10 shadow-md text-center">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="rgba(214,168,90,0.3)" class="mx-auto mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151C7.563 6.068 6 8.789 6 11h4v10H0z"/></svg>
+                                <p class="text-text/80 text-lg leading-relaxed mb-6 italic">«Сотрудничаем с Секвойей по городским проектам уже 5 лет. Всегда профессиональный подход, качественные материалы и креативные решения. Рекомендую!»</p>
+                                <footer>
+                                    <span class="block font-heading text-lg font-semibold text-primary">Аслан Мусаев</span>
+                                    <span class="text-muted text-sm">Муниципальный заказчик</span>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dots -->
+                <div class="flex justify-center gap-2 mt-8" id="testimonial-dots">
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 transition-all duration-300 active" aria-label="Отзыв 1"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 transition-all duration-300" aria-label="Отзыв 2"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 transition-all duration-300" aria-label="Отзыв 3"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PROMOTIONS / EVENTS TEASER ========== -->
+        <section class="py-20 lg:py-28 bg-surface" aria-labelledby="promo-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+                    <!-- Promotions -->
+                    <div class="bg-gradient-to-br from-accent/10 to-accent/5 rounded-3xl p-8 lg:p-10 border border-accent/20">
+                        <span class="inline-block bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4">Акция</span>
+                        <h3 class="font-heading text-2xl sm:text-3xl font-bold text-primary mb-3">Сезонное предложение</h3>
+                        <p class="text-muted mb-5">Скидка 20% на проектирование ландшафтного дизайна при заказе до конца месяца. Успейте подготовить участок к новому сезону!</p>
+                        <a href="/promotions" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors">
+                            Все акции
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                    <!-- Events -->
+                    <div class="bg-gradient-to-br from-primary/5 to-secondary/10 rounded-3xl p-8 lg:p-10 border border-primary/10">
+                        <span class="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4">События</span>
+                        <h3 class="font-heading text-2xl sm:text-3xl font-bold text-primary mb-3">Фестиваль садово-паркового искусства</h3>
+                        <p class="text-muted mb-5">Компания «Секвойя» принимает участие в ежегодном фестивале. Приглашаем посетить наш выставочный сад и познакомиться с командой.</p>
+                        <a href="/events" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors">
+                            Все события
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CTA SECTION ========== -->
+        <section class="py-20 lg:py-28 bg-primary relative overflow-hidden" aria-labelledby="cta-heading">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(214,168,90,0.1),transparent_70%)]"></div>
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'15\' fill=\'none\' stroke=\'%23ffffff\' stroke-width=\'0.5\'/%3E%3C/svg%3E'); background-size: 60px 60px;"></div>
+            <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 id="cta-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5">Готовы преобразить ваш участок?</h2>
+                <p class="text-white/70 text-lg mb-8 max-w-xl mx-auto">Свяжитесь с нами сегодня — мы предложим оптимальное решение для вашего проекта</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="/contact" class="inline-flex items-center gap-2 bg-accent text-white font-semibold px-8 py-4 rounded-full hover:bg-white hover:text-primary transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-base">
+                        Оставить заявку
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a href="tel:+78001234567" class="inline-flex items-center gap-2 border-2 border-white/30 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/10 hover:border-white/60 transition-all duration-300 text-base">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        +7 (800) 123-45-67
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== BLOG / ARTICLES TEASER ========== -->
+        <section class="py-20 lg:py-28 bg-background" aria-labelledby="blog-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14">
+                    <div>
+                        <span class="text-accent font-medium text-sm tracking-widest uppercase">Блог</span>
+                        <h2 id="blog-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mt-3">Статьи и советы</h2>
+                    </div>
+                    <a href="/blog" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors flex-shrink-0">
+                        Все статьи
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    <!-- Article 1 -->
+                    <article class="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                        <div class="aspect-[16/10] bg-gradient-to-br from-primary/10 to-secondary/20 flex items-center justify-center">
+                            <span class="text-primary/30 font-heading text-4xl">🌿</span>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-accent font-medium uppercase tracking-wider">Советы</span>
+                            <h3 class="font-heading text-lg font-semibold text-primary mt-1 mb-2 group-hover:text-secondary transition-colors">Как подготовить сад к зиме: 10 шагов</h3>
+                            <p class="text-muted text-sm line-clamp-2">Практические рекомендации по уходу за растениями в холодный сезон.</p>
+                        </div>
+                    </article>
+                    <!-- Article 2 -->
+                    <article class="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                        <div class="aspect-[16/10] bg-gradient-to-br from-secondary/10 to-accent/20 flex items-center justify-center">
+                            <span class="text-primary/30 font-heading text-4xl">💧</span>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-accent font-medium uppercase tracking-wider">Кейс</span>
+                            <h3 class="font-heading text-lg font-semibold text-primary mt-1 mb-2 group-hover:text-secondary transition-colors">Система автополива: опыт установки</h3>
+                            <p class="text-muted text-sm line-clamp-2">Обзор современных решений для автоматического полива участка.</p>
+                        </div>
+                    </article>
+                    <!-- Article 3 -->
+                    <article class="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                        <div class="aspect-[16/10] bg-gradient-to-br from-accent/10 to-primary/15 flex items-center justify-center">
+                            <span class="text-primary/30 font-heading text-4xl">🏆</span>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-accent font-medium uppercase tracking-wider">Новости</span>
+                            <h3 class="font-heading text-lg font-semibold text-primary mt-1 mb-2 group-hover:text-secondary transition-colors">Победа на фестивале ландшафтного искусства</h3>
+                            <p class="text-muted text-sm line-clamp-2">Компания «Секвойя» заняла первое место в номинации «Городской сад».</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CONTACT / MAP TEASER ========== -->
+        <section class="py-20 lg:py-28 bg-surface" aria-labelledby="contact-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div>
+                        <span class="text-accent font-medium text-sm tracking-widest uppercase">Контакты</span>
+                        <h2 id="contact-heading" class="font-heading text-3xl sm:text-4xl font-bold text-primary mt-3 mb-6">Свяжитесь с нами</h2>
+                        <div class="space-y-5">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-sm text-muted">Адрес</span>
+                                    <span class="text-text font-medium">ул. Асланбека Шерипова, 61, Грозный, Чечня</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-sm text-muted">Телефон</span>
+                                    <a href="tel:+78001234567" class="text-text font-medium hover:text-accent transition-colors">+7 (800) 123-45-67</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-sm text-muted">Email</span>
+                                    <a href="mailto:info@sequoya.ru" class="text-text font-medium hover:text-accent transition-colors">info@sequoya.ru</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Social links -->
+                        <div class="flex gap-3 mt-7">
+                            <a href="https://t.me/sequoya" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary hover:text-white flex items-center justify-center transition-all duration-300" aria-label="Telegram">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.87-1.25 4.79-2.08 5.76-2.48 2.74-1.14 3.31-1.34 3.68-1.34.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                            </a>
+                            <a href="https://instagram.com/sequoya" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary hover:text-white flex items-center justify-center transition-all duration-300" aria-label="Instagram">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                            </a>
+                            <a href="https://vk.com/sequoya" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary hover:text-white flex items-center justify-center transition-all duration-300" aria-label="ВКонтакте">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.35 12.48c-.18.36-.53.53-.92.4-.56-.17-1.08-.47-1.56-.8-.34-.24-.67-.5-.98-.77-.12-.1-.22-.2-.34-.18-.13.03-.18.14-.22.26-.16.4-.3.82-.46 1.22-.12.3-.34.44-.66.44h-.56c-1.4 0-2.66-.66-3.6-1.78-1.1-1.3-2.06-2.84-2.82-4.42-.1-.2-.08-.34.08-.48.22-.2.46-.2.7-.2h1.66c.22 0 .38.08.48.3.18.38.36.76.56 1.12.2.36.42.7.7 1 .1.12.2.22.3.14.08-.06.1-.2.1-.3 0-.44.02-.9.04-1.34.02-.4-.06-.68-.42-.82-.14-.06-.1-.16-.04-.26.12-.18.32-.22.56-.22h2.64c.32 0 .44.08.48.38.06.42.04.86.06 1.3 0 .1.06.2.18.24.1.02.2-.02.26-.08.3-.32.54-.68.76-1.06.2-.34.34-.7.48-1.06.06-.18.2-.28.38-.28h1.8c.14 0 .28.04.36.16.08.14.06.3-.02.44-.3.58-.64 1.14-1 1.68-.3.44-.6.88-.9 1.32-.14.2-.16.34-.02.54.24.36.52.68.8 1 .4.44.82.88 1.14 1.4.16.26.14.48-.1.64z"/></svg>
+                            </a>
+                            <a href="https://youtube.com/@sequoya" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary hover:text-white flex items-center justify-center transition-all duration-300" aria-label="YouTube">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Map placeholder -->
+                    <div class="aspect-[4/3] rounded-3xl bg-gradient-to-br from-primary/8 to-secondary/15 flex items-center justify-center border border-gray-100 overflow-hidden relative">
+                        <div class="text-center">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="1.5" class="mx-auto mb-3 opacity-50"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
+                            <span class="text-muted text-sm">ул. Асланбека Шерипова, 61</span>
+                            <span class="block text-muted text-sm">Грозный, Чечня</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-primary text-white pt-16 pb-8" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <a href="/" class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F3D2B" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 22h20L12 2z"/><path d="M12 22V12"/></svg>
+                        </div>
+                        <span class="font-heading text-xl font-bold tracking-tight">Секвойя</span>
+                    </a>
+                    <p class="text-white/60 text-sm leading-relaxed">Архитектура ландшафта. Создаём красоту вокруг вас с 2010 года.</p>
+                </div>
+                <!-- Услуги -->
+                <div>
+                    <h4 class="font-heading text-sm font-semibold text-accent uppercase tracking-wider mb-4">Услуги</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="/service/landscaping" class="text-white/60 hover:text-white transition-colors text-sm">Проектирование</a></li>
+                        <li><a href="/service/lawns" class="text-white/60 hover:text-white transition-colors text-sm">Газоны</a></li>
+                        <li><a href="/service/planting" class="text-white/60 hover:text-white transition-colors text-sm">Озеленение</a></li>
+                        <li><a href="/service/ponds" class="text-white/60 hover:text-white transition-colors text-sm">Водоёмы</a></li>
+                    </ul>
+                </div>
+                <!-- Компания -->
+                <div>
+                    <h4 class="font-heading text-sm font-semibold text-accent uppercase tracking-wider mb-4">Компания</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="/about" class="text-white/60 hover:text-white transition-colors text-sm">О нас</a></li>
+                        <li><a href="/projects" class="text-white/60 hover:text-white transition-colors text-sm">Проекты</a></li>
+                        <li><a href="/blog" class="text-white/60 hover:text-white transition-colors text-sm">Блог</a></li>
+                        <li><a href="/events" class="text-white/60 hover:text-white transition-colors text-sm">События</a></li>
+                    </ul>
+                </div>
+                <!-- Клиентам -->
+                <div>
+                    <h4 class="font-heading text-sm font-semibold text-accent uppercase tracking-wider mb-4">Клиентам</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="/promotions" class="text-white/60 hover:text-white transition-colors text-sm">Акции</a></li>
+                        <li><a href="/testimonials" class="text-white/60 hover:text-white transition-colors text-sm">Отзывы</a></li>
+                        <li><a href="/faq" class="text-white/60 hover:text-white transition-colors text-sm">ЧАВО</a></li>
+                        <li><a href="/guides" class="text-white/60 hover:text-white transition-colors text-sm">Гайды</a></li>
+                    </ul>
+                </div>
+                <!-- Контакты -->
+                <div>
+                    <h4 class="font-heading text-sm font-semibold text-accent uppercase tracking-wider mb-4">Контакты</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="tel:+78001234567" class="text-white/60 hover:text-white transition-colors text-sm">+7 (800) 123-45-67</a></li>
+                        <li><a href="mailto:info@sequoya.ru" class="text-white/60 hover:text-white transition-colors text-sm">info@sequoya.ru</a></li>
+                        <li><span class="text-white/60 text-sm">ул. Асланбека Шерипова, 61</span></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom bar -->
+            <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-white/40 text-xs">&copy; 2025 Секвойя. Все права защищены.</p>
+                <div class="flex gap-6">
+                    <a href="/privacy" class="text-white/40 hover:text-white/70 text-xs transition-colors">Политика конфиденциальности</a>
+                    <a href="/terms" class="text-white/40 hover:text-white/70 text-xs transition-colors">Условия использования</a>
+                </div>
+                <p class="text-white/30 text-xs">Разработка: <a href="https://groznet.com" target="_blank" rel="noopener" class="hover:text-white/60 transition-colors">GrozNet</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-accent text-white shadow-lg flex items-center justify-center opacity-0 translate-y-4 pointer-events-none transition-all duration-300 hover:bg-primary hover:scale-110 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2" aria-label="Наверх">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        (function() {
+            // --- DOM Elements ---
+            const header = document.getElementById('site-header');
+            const topBar = document.getElementById('top-bar');
+            const mainNavBar = document.getElementById('main-nav-bar');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+            const mobileServicesToggle = document.getElementById('mobile-services-toggle');
+            const mobileServicesSubmenu = document.getElementById('mobile-services-submenu');
+            const mobileServicesChevron = document.getElementById('mobile-services-chevron');
+            const backToTopBtn = document.getElementById('back-to-top');
+            const beforeAfterContainer = document.getElementById('before-after-container');
+            const afterLayer = document.getElementById('after-layer');
+            const sliderHandle = document.getElementById('slider-handle');
+            const testimonialsTrack = document.getElementById('testimonials-track');
+            const testimonialDots = document.querySelectorAll('#testimonial-dots .testimonial-dot');
+
+            // --- Header Scroll Effect ---
+            let lastScrollY = 0;
+            function updateHeader() {
+                const scrollY = window.scrollY;
+                if (scrollY > 80) {
+                    mainNavBar.classList.remove('bg-white/80', 'backdrop-blur-md');
+                    mainNavBar.classList.add('bg-white', 'shadow-md');
+                    if (topBar) topBar.style.opacity = '0';
+                    if (topBar) topBar.style.maxHeight = '0';
+                    if (topBar) topBar.style.padding = '0';
+                    if (topBar) topBar.style.overflow = 'hidden';
+                } else {
+                    mainNavBar.classList.add('bg-white/80', 'backdrop-blur-md');
+                    mainNavBar.classList.remove('bg-white', 'shadow-md');
+                    if (topBar) topBar.style.opacity = '1';
+                    if (topBar) topBar.style.maxHeight = '40px';
+                    if (topBar) topBar.style.padding = '';
+                    if (topBar) topBar.style.overflow = '';
+                }
+                lastScrollY = scrollY;
+
+                // Back to top button
+                if (scrollY > 600) {
+                    backToTopBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    backToTopBtn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    backToTopBtn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                }
+            }
+            window.addEventListener('scroll', updateHeader, { passive: true });
+            updateHeader();
+
+            // --- Mobile Menu ---
+            let menuOpen = false;
+
+            function openMenu() {
+                menuOpen = true;
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                mobileMenu.setAttribute('aria-hidden', 'false');
+                menuIconOpen.classList.add('hidden');
+                menuIconClose.classList.remove('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMenu() {
+                menuOpen = false;
+                mobileMenu.classList.add('translate-x-full');
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                // Reset submenu
+                if (mobileServicesSubmenu && !mobileServicesSubmenu.classList.contains('hidden')) {
+                    mobileServicesSubmenu.classList.add('hidden');
+                    mobileServicesChevron.style.transform = 'rotate(0deg)';
+                    mobileServicesToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', () => {
+                if (menuOpen) closeMenu();
+                else openMenu();
+            });
+
+            // Close menu on link click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    setTimeout(closeMenu, 150);
+                });
+            });
+
+            // Mobile services accordion
+            if (mobileServicesToggle && mobileServicesSubmenu) {
+                mobileServicesToggle.addEventListener('click', () => {
+                    const isOpen = !mobileServicesSubmenu.classList.contains('hidden');
+                    if (isOpen) {
+                        mobileServicesSubmenu.classList.add('hidden');
+                        mobileServicesChevron.style.transform = 'rotate(0deg)';
+                        mobileServicesToggle.setAttribute('aria-expanded', 'false');
+                    } else {
+                        mobileServicesSubmenu.classList.remove('hidden');
+                        mobileServicesChevron.style.transform = 'rotate(180deg)';
+                        mobileServicesToggle.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            }
+
+            // --- Before/After Slider ---
+            let isDragging = false;
+
+            function setSliderPosition(percent) {
+                percent = Math.max(5, Math.min(95, percent));
+                afterLayer.style.width = percent + '%';
+                sliderHandle.style.left = percent + '%';
+                sliderHandle.setAttribute('aria-valuenow', Math.round(percent));
+            }
+
+            function handleSliderMove(clientX) {
+                const rect = beforeAfterContainer.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const percent = (x / rect.width) * 100;
+                setSliderPosition(percent);
+            }
+
+            sliderHandle.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                e.preventDefault();
+                sliderHandle.style.transition = 'none';
+                afterLayer.style.transition = 'none';
+            });
+
+            sliderHandle.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                sliderHandle.style.transition = 'none';
+                afterLayer.style.transition = 'none';
+            }, { passive: false });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) handleSliderMove(e.clientX);
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                if (isDragging) handleSliderMove(e.touches[0].clientX);
+            }, { passive: false });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    sliderHandle.style.transition = 'left 0.05s linear';
+                    afterLayer.style.transition = 'width 0.05s linear';
+                }
+            });
+
+            document.addEventListener('touchend', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    sliderHandle.style.transition = 'left 0.05s linear';
+                    afterLayer.style.transition = 'width 0.05s linear';
+                }
+            });
+
+            // Click on container to move slider
+            beforeAfterContainer.addEventListener('click', (e) => {
+                if (e.target === sliderHandle || sliderHandle.contains(e.target)) return;
+                handleSliderMove(e.clientX);
+            });
+
+            // Keyboard support
+            sliderHandle.addEventListener('keydown', (e) => {
+                const currentPercent = parseFloat(sliderHandle.style.left) || 50;
+                if (e.key === 'ArrowLeft') setSliderPosition(currentPercent - 3);
+                if (e.key === 'ArrowRight') setSliderPosition(currentPercent + 3);
+            });
+
+            // --- Testimonials Carousel ---
+            let currentTestimonial = 0;
+            const totalTestimonials = testimonialDots.length;
+            let testimonialInterval;
+
+            function goToTestimonial(index) {
+                currentTestimonial = index;
+                testimonialsTrack.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+                testimonialDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentTestimonial);
+                    if (i === currentTestimonial) {
+                        dot.classList.add('w-7', 'rounded', 'bg-primary');
+                        dot.classList.remove('w-3', 'bg-gray-300');
+                    } else {
+                        dot.classList.remove('w-7', 'rounded', 'bg-primary');
+                        dot.classList.add('w-3', 'bg-gray-300');
+                    }
+                });
+            }
+
+            testimonialDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToTestimonial(index);
+                    resetTestimonialAutoplay();
+                });
+            });
+
+            function nextTestimonial() {
+                goToTestimonial((currentTestimonial + 1) % totalTestimonials);
+            }
+
+            function resetTestimonialAutoplay() {
+                clearInterval(testimonialInterval);
+                testimonialInterval = setInterval(nextTestimonial, 5000);
+            }
+
+            // Initialize
+            goToTestimonial(0);
+            testimonialInterval = setInterval(nextTestimonial, 5000);
+
+            // Pause on hover
+            const carouselContainer = document.getElementById('testimonials-carousel');
+            carouselContainer.addEventListener('mouseenter', () => clearInterval(testimonialInterval));
+            carouselContainer.addEventListener('mouseleave', () => {
+                testimonialInterval = setInterval(nextTestimonial, 5000);
+            });
+
+            // --- Back to Top ---
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // --- Keyboard: Escape closes mobile menu ---
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && menuOpen) {
+                    closeMenu();
+                }
+            });
+
+            // --- Resize handler: close mobile menu on desktop ---
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024 && menuOpen) {
+                    closeMenu();
+                }
+            });
+
+            console.log('🌿 Sequoya homepage initialized successfully.');
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Секвойя | Архитектура ландшафта — живой ландшафт</title>
+    <!-- Google Fonts: Montserrat + Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* custom keyframes for organic motion & parallax feel */
+        @keyframes floatLeaf1 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-25px) translateX(12px) rotate(5deg);
+            }
+        }
+
+        @keyframes floatLeaf2 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-18px) translateX(-8px) rotate(-3deg);
+            }
+        }
+
+        @keyframes driftBg {
+            0% {
+                transform: translateX(-2%) translateY(-1%) scale(1.02);
+            }
+
+            100% {
+                transform: translateX(2%) translateY(1%) scale(1);
+            }
+        }
+
+        @keyframes swayGrass {
+
+            0%,
+            100% {
+                transform: skewX(-1deg) rotate(-0.5deg);
+            }
+
+            50% {
+                transform: skewX(1deg) rotate(0.5deg);
+            }
+        }
+
+        @keyframes gentlePulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes slowWave {
+            0% {
+                transform: translateX(-10px);
+            }
+
+            100% {
+                transform: translateX(10px);
+            }
+        }
+
+        .animate-float-1 {
+            animation: floatLeaf1 7s ease-in-out infinite;
+        }
+
+        .animate-float-2 {
+            animation: floatLeaf2 9s ease-in-out infinite;
+        }
+
+        .animate-drift-bg {
+            animation: driftBg 22s ease-in-out infinite alternate;
+        }
+
+        .animate-sway-grass {
+            animation: swayGrass 6s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+
+        .animate-pulse-soft {
+            animation: gentlePulse 4s ease-in-out infinite;
+        }
+
+        .animate-wave-x {
+            animation: slowWave 12s ease-in-out infinite alternate;
+        }
+
+        /* custom clip paths for organic terrain */
+        .clip-terrain-left {
+            clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
+        }
+
+        .blob-mask-hero {
+            mask-image: radial-gradient(ellipse 70% 60% at 30% 50%, black 55%, transparent 90%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 30% 50%, black 55%, transparent 90%);
+        }
+
+        /* custom scroll & body */
+        body {
+            background: #FCF6EA;
+            overflow-x: hidden;
+        }
+
+        .glass-natural {
+            background: rgba(252, 246, 234, 0.35);
+            backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(107, 127, 89, 0.25);
+            box-shadow: 0 15px 35px -15px rgba(0, 0, 0, 0.1);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* custom smooth hover for nav buttons */
+        .organic-nav-link {
+            position: relative;
+            transition: all 0.25s ease;
+        }
+
+        .organic-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #4A6B3F;
+            border-radius: 2px;
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .organic-nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sequoia-deep': '#18392B',
+                        'sequoia-forest': '#1A3F2C',
+                        'sequoia-moss': '#4A6B3F',
+                        'sequoia-olive': '#6B7F59',
+                        'sequoia-sage': '#A3B89A',
+                        'sequoia-cream': '#FEF9E6',
+                        'sequoia-sand': '#ECE3D0',
+                        'sequoia-earth': '#7A5C4A',
+                        'sequoia-stone': '#5E675B',
+                        'sequoia-gold': '#B78C4A',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'organic-xl': '0 25px 45px -18px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,245,0.6)',
+                        'inner-nature': 'inset 0 2px 12px rgba(74,107,63,0.1), 0 12px 28px -12px rgba(0,0,0,0.12)',
+                    },
+                    backgroundImage: {
+                        'forest-gradient': 'radial-gradient(circle at 20% 30%, rgba(167, 195, 148, 0.12) 0%, rgba(26,63,44,0.03) 80%)',
+                        'leaf-pattern': "url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" opacity=\"0.06\"%3E%3Cpath fill=\"%234A6B3F\" d=\"M100,20 C115,40 130,70 120,95 C110,120 85,130 65,120 C45,110 30,85 40,60 C50,35 80,10 100,20z\"%3E%3C/path%3E%3C/svg%3E')",
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-body text-sequoia-deep bg-sequoia-cream overflow-x-hidden">
+
+    <!-- ORGANIC, LAYERED HEADER: multi-layer terrain + foreground overlaps + parallax motion -->
+    <header class="relative w-full min-h-[95vh] md:min-h-[100vh] overflow-hidden isolate">
+
+        <!-- BACKGROUND LAYER 1: deep forest sky + moving cloud shapes & gradients -->
+        <div class="absolute inset-0 z-0 animate-drift-bg">
+            <div
+                class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-sequoia-sand/40 via-sequoia-cream to-sequoia-olive/15">
+            </div>
+            <!-- soft sun glow -->
+            <div
+                class="absolute top-[5%] right-[10%] w-80 h-80 bg-sequoia-gold/20 rounded-full blur-[80px] animate-pulse-soft">
+            </div>
+            <!-- atmospheric mist layers -->
+            <div class="absolute top-1/3 left-[-5%] w-[70%] h-[35%] bg-sequoia-sage/20 rounded-full blur-[90px]"></div>
+            <div class="absolute bottom-[15%] right-[-5%] w-[80%] h-[40%] bg-sequoia-moss/10 rounded-full blur-[100px]">
+            </div>
+            <div class="absolute inset-0 bg-leaf-pattern opacity-40 pointer-events-none mix-blend-overlay"></div>
+        </div>
+
+        <!-- MIDGROUND LAYER: asymmetric rolling hills / terrain curves (SVG + blurred organic shapes) -->
+        <div class="absolute bottom-0 left-0 w-full pointer-events-none z-10">
+            <!-- primary undulating terrain -->
+            <svg class="absolute bottom-0 w-full h-auto" viewBox="0 0 1440 380" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="hillGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#4A6B3F" stop-opacity="0.25" />
+                        <stop offset="100%" stop-color="#1A3F2C" stop-opacity="0.05" />
+                    </linearGradient>
+                    <linearGradient id="hillGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#6B7F59" stop-opacity="0.18" />
+                        <stop offset="100%" stop-color="#A3B89A" stop-opacity="0.08" />
+                    </linearGradient>
+                </defs>
+                <path fill="url(#hillGrad1)"
+                    d="M0,320L40,293.3C80,267,160,213,240,197.3C320,181,400,203,480,208C560,213,640,203,720,202.7C800,203,880,213,960,208C1040,203,1120,181,1200,170.7C1280,160,1360,160,1400,160L1440,160L1440,380L1400,380C1360,380,1280,380,1200,380C1120,380,1040,380,960,380C880,380,800,380,720,380C640,380,560,380,480,380C400,380,320,380,240,380C160,380,80,380,40,380L0,380Z">
+                </path>
+                <path fill="url(#hillGrad2)"
+                    d="M0,280L48,266.7C96,253,192,227,288,218.7C384,211,480,221,576,229.3C672,237,768,243,864,234.7C960,227,1056,203,1152,197.3C1248,192,1344,203,1392,208L1440,213L1440,380L1392,380C1344,380,1248,380,1152,380C1056,380,960,380,864,380C768,380,672,380,576,380C480,380,384,380,288,380C192,380,96,380,48,380L0,380Z">
+                </path>
+                <path fill="#A3B89A" fill-opacity="0.12"
+                    d="M0,330L48,320C96,310,192,290,288,288C384,286,480,302,576,314.7C672,327,768,336,864,330.7C960,325,1056,306,1152,298.7C1248,291,1344,294,1392,296L1440,298L1440,380L1392,380C1344,380,1248,380,1152,380C1056,380,960,380,864,380C768,380,672,380,576,380C480,380,384,380,288,380C192,380,96,380,48,380L0,380Z">
+                </path>
+            </svg>
+            <!-- extra wavy organic overlay (asymmetric curves) -->
+            <div
+                class="absolute -top-20 left-0 w-full h-48 bg-gradient-to-r from-sequoia-olive/10 via-transparent to-sequoia-moss/5 blur-2xl rounded-[100%]">
+            </div>
+        </div>
+
+        <!-- FOREGROUND NATURE ELEMENTS: floating leaves, ferns, branches with motion -->
+        <div class="absolute left-[2%] top-[15%] w-24 md:w-32 opacity-80 pointer-events-none z-20 animate-float-1">
+            <svg viewBox="0 0 80 80" fill="none">
+                <path
+                    d="M40,10 C32,20 24,32 16,42 C10,50 12,60 24,64 C36,68 52,64 60,56 C68,48 66,38 58,32 C50,26 44,16 40,10Z"
+                    fill="#4A6B3F" fill-opacity="0.65" stroke="#6B7F59" stroke-width="1.2" />
+                <path d="M40,18 L48,30 L40,26 L32,30 L40,18Z" fill="#A3B89A" fill-opacity="0.85" />
+            </svg>
+        </div>
+        <div class="absolute right-[3%] top-[22%] w-20 md:w-28 pointer-events-none z-20 animate-float-2">
+            <svg viewBox="0 0 70 90" fill="none">
+                <path
+                    d="M35,15 C28,28 18,38 12,52 C8,64 14,74 26,76 C38,78 54,72 62,60 C70,48 66,36 56,28 C46,20 40,24 35,15Z"
+                    fill="#6B7F59" fill-opacity="0.5" stroke="#A3B89A" stroke-width="1" />
+                <circle cx="35" cy="42" r="6" fill="#ECE3D0" fill-opacity="0.9" />
+            </svg>
+        </div>
+        <!-- grass blade silhouettes (bottom left/right) -->
+        <div class="absolute bottom-[8%] left-[4%] w-28 pointer-events-none z-20 animate-sway-grass">
+            <i class="fas fa-leaf text-5xl text-sequoia-moss/40 rotate-45"></i>
+            <i class="fas fa-seedling text-4xl text-sequoia-olive/30 -mt-4 ml-6 inline-block"></i>
+        </div>
+        <div class="absolute bottom-[12%] right-[5%] w-32 pointer-events-none z-20 animate-sway-grass"
+            style="animation-delay: -2s;">
+            <i class="fas fa-feather-alt text-5xl text-sequoia-sage/50 rotate-12"></i>
+        </div>
+
+        <!-- LAYERED NAVIGATION: organic floating glass effect, not boxed -->
+        <div class="relative z-30 w-full px-5 pt-6 md:pt-8">
+            <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-3">
+                <!-- logo with natural rounded leaf integration -->
+                <div
+                    class="flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-2xl px-5 py-2 shadow-inner-nature hover:shadow-organic-xl transition-all duration-300">
+                    <div class="w-11 h-11 bg-sequoia-forest rounded-2xl flex items-center justify-center shadow-md">
+                        <i class="fas fa-tree text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <span
+                            class="font-heading font-extrabold text-2xl tracking-tight text-sequoia-deep">Секвойя</span>
+                        <p class="text-[10px] font-semibold text-sequoia-olive -mt-0.5 tracking-wider">АРХИТЕКТУРА
+                            ЛАНДШАФТА</p>
+                    </div>
+                </div>
+
+                <!-- desktop menu with organic shape (rounded pill but integrated) -->
+                <nav
+                    class="hidden lg:flex items-center gap-8 xl:gap-10 bg-white/15 backdrop-blur-lg px-7 py-3 rounded-full border border-sequoia-sage/30 shadow-organic-xl">
+                    <a href="#"
+                        class="organic-nav-link font-medium text-sequoia-deep/85 hover:text-sequoia-moss transition text-sm xl:text-base">Главная</a>
+                    <a href="#"
+                        class="organic-nav-link font-medium text-sequoia-deep/85 hover:text-sequoia-moss transition">Услуги</a>
+                    <a href="#"
+                        class="organic-nav-link font-medium text-sequoia-deep/85 hover:text-sequoia-moss transition">Проекты</a>
+                    <a href="#"
+                        class="organic-nav-link font-medium text-sequoia-deep/85 hover:text-sequoia-moss transition">До
+                        & После</a>
+                    <a href="#"
+                        class="organic-nav-link font-medium text-sequoia-deep/85 hover:text-sequoia-moss transition">О
+                        нас</a>
+                    <a href="#"
+                        class="organic-nav-link font-medium text-sequoia-deep/85 hover:text-sequoia-moss transition">Контакты</a>
+                </nav>
+
+                <div class="flex gap-3 items-center">
+                    <button id="searchBtnOrganic"
+                        class="text-sequoia-stone hover:text-sequoia-moss transition text-xl backdrop-blur-md bg-white/30 p-2 rounded-full w-10 h-10 flex items-center justify-center shadow-inner-nature"><i
+                            class="fas fa-search"></i></button>
+                    <a href="#"
+                        class="hidden md:flex bg-sequoia-moss/85 hover:bg-sequoia-forest text-white font-semibold py-2.5 px-6 rounded-full text-sm transition-all shadow-md backdrop-blur-sm items-center gap-2"><i
+                            class="fas fa-leaf"></i>Обсудить проект</a>
+                    <button id="mobileMenuBtnOrganic"
+                        class="lg:hidden flex w-10 h-10 rounded-full bg-white/40 backdrop-blur border border-sequoia-sage/40 items-center justify-center"><i
+                            class="fas fa-bars text-sequoia-deep text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE SIDE PANEL (organic fullscreen) -->
+        <div id="mobileMenuOrganicPanel"
+            class="lg:hidden fixed inset-0 bg-sequoia-forest/95 backdrop-blur-2xl z-50 transform translate-x-full transition-transform duration-500 ease-out">
+            <div class="flex justify-end p-6"><button id="closeMobileOrganic" class="text-white text-3xl"><i
+                        class="fas fa-times"></i></button></div>
+            <nav class="flex flex-col items-center gap-7 text-white text-2xl font-medium mt-12">
+                <a href="#" class="hover:text-sequoia-sage border-b border-white/20 pb-1">Главная</a>
+                <a href="#" class="hover:text-sequoia-sage">Услуги</a>
+                <a href="#" class="hover:text-sequoia-sage">Проекты</a>
+                <a href="#" class="hover:text-sequoia-sage">До & После</a>
+                <a href="#" class="hover:text-sequoia-sage">О компании</a>
+                <a href="#" class="hover:text-sequoia-sage">Контакты</a>
+                <a href="#"
+                    class="mt-8 bg-sequoia-cream text-sequoia-forest py-3 px-8 rounded-full shadow-lg">Консультация</a>
+            </nav>
+            <div class="absolute bottom-10 left-0 w-full text-center text-white/40 text-sm"><i
+                    class="fas fa-seedling mr-1"></i> природа в каждой детали</div>
+        </div>
+
+        <!-- HERO CONTENT → embedded in the landscape, overlapping natural shapes, organic CTA -->
+        <div
+            class="relative z-20 flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-5 pt-12 md:pt-20 lg:pt-24 gap-8">
+            <!-- left text column (immersive blend) -->
+            <div class="w-full md:w-3/5 lg:w-1/2 backdrop-blur-[3px] rounded-3xl p-4 md:p-0">
+                <div
+                    class="inline-flex items-center gap-2 bg-white/25 backdrop-blur-md rounded-full px-4 py-1.5 text-sm font-semibold text-sequoia-deep border border-sequoia-sage/40 mb-6 shadow-sm">
+                    <i class="fas fa-certificate text-sequoia-moss text-xs"></i> <span>15+ лет экологической
+                        архитектуры</span>
+                </div>
+                <h1
+                    class="font-heading font-extrabold text-5xl md:text-7xl lg:text-8xl leading-[1.12] tracking-tight text-sequoia-deep drop-shadow-sm">
+                    Живая<br>
+                    <span class="text-sequoia-moss relative inline-block">архитектура
+                        <svg class="absolute bottom-2 left-0 w-full h-3 -z-10" viewBox="0 0 200 8"
+                            preserveAspectRatio="none">
+                            <path d="M0,6 Q50,0 100,6 T200,6" stroke="#A3B89A" fill="none" stroke-width="2"
+                                opacity="0.7" />
+                        </svg>
+                    </span><br>ландшафта
+                </h1>
+                <p class="text-sequoia-stone text-lg md:text-xl max-w-xl mt-5 leading-relaxed backdrop-blur-sm">
+                    Благоустройство, озеленение и дизайн-проекты. Создаём среду, где природа говорит с архитектурой на
+                    одном языке. Чечня и вся Россия.</p>
+
+                <div class="flex flex-wrap gap-5 mt-8">
+                    <a href="#"
+                        class="group bg-sequoia-moss hover:bg-sequoia-deep text-white font-bold py-3.5 px-8 rounded-full transition-all shadow-elevated flex items-center gap-2 text-base md:text-lg"><i
+                            class="fas fa-arrow-right group-hover:translate-x-1 transition"></i> Изучить услуги</a>
+                    <a href="#"
+                        class="backdrop-blur-md bg-white/30 border border-sequoia-sage/60 hover:bg-white/50 text-sequoia-deep font-semibold py-3.5 px-8 rounded-full transition-all flex items-center gap-2"><i
+                            class="fas fa-play-circle"></i> Смотреть проекты</a>
+                </div>
+
+                <div class="flex gap-6 mt-7 text-sm text-sequoia-stone/80">
+                    <div class="flex items-center gap-2"><i
+                            class="fas fa-check-circle text-sequoia-moss"></i><span>Премиум-качество</span></div>
+                    <div class="flex items-center gap-2"><i class="fas fa-leaf text-sequoia-moss"></i><span>Экосистемный
+                            подход</span></div>
+                </div>
+            </div>
+            <!-- right side: floating organic iconography (not standard image) -->
+            <div class="w-full md:w-2/5 relative flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 animate-float-1">
+                    <div class="absolute inset-0 bg-sequoia-moss/10 rounded-full blur-3xl"></div>
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-sequoia-sage/20 rounded-full blur-2xl">
+                    </div>
+                    <i
+                        class="fas fa-mountain-sun absolute text-7xl text-sequoia-olive/40 top-10 left-10 animate-pulse-soft"></i>
+                    <i
+                        class="fas fa-tree absolute text-6xl text-sequoia-moss/50 bottom-5 right-5 animate-sway-grass"></i>
+                    <div class="absolute top-1/3 right-1/4 w-12 h-12 bg-sequoia-gold/30 rounded-full blur-md"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- additional organic bottom overlapping wave / grass transition -->
+        <div class="absolute bottom-0 left-0 w-full pointer-events-none z-20">
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="w-full">
+                <path d="M0,60 Q150,20 300,40 T600,30 T900,55 T1200,25 L1200,80 L0,80 Z" fill="#4A6B3F"
+                    fill-opacity="0.12" />
+                <path d="M0,70 Q180,35 400,55 T800,45 T1200,65 L1200,80 L0,80 Z" fill="#A3B89A" fill-opacity="0.1" />
+            </svg>
+        </div>
+    </header>
+
+    <!-- Next section blending with header: smooth transition -->
+    <section class="relative bg-sequoia-cream z-10 py-20 px-5 -mt-1 rounded-t-[3rem] md:rounded-t-[4rem] shadow-2xl">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 text-sequoia-moss bg-white/40 rounded-full px-4 py-1 mb-5"><i
+                    class="fas fa-leaf"></i><span class="text-sm font-semibold">эко-философия</span></div>
+            <h2 class="font-heading text-3xl md:text-5xl font-bold text-sequoia-deep">Гармония, вдохновлённая лесом</h2>
+            <p class="text-sequoia-stone text-lg mt-5 max-w-2xl mx-auto">Более 250 реализованных объектов — от частных
+                садов до городских пространств. Мы переосмысляем ландшафт как живой организм.</p>
+        </div>
+    </section>
+
+    <script>
+            (function () {
+                // Mobile menu logic
+                const mobileBtn = document.getElementById('mobileMenuBtnOrganic');
+                const mobilePanel = document.getElementById('mobileMenuOrganicPanel');
+                const closeBtn = document.getElementById('closeMobileOrganic');
+                if (mobileBtn && mobilePanel && closeBtn) {
+                    mobileBtn.addEventListener('click', () => {
+                        mobilePanel.classList.remove('translate-x-full');
+                        mobilePanel.classList.add('translate-x-0');
+                        document.body.style.overflow = 'hidden';
+                    });
+                    closeBtn.addEventListener('click', () => {
+                        mobilePanel.classList.add('translate-x-full');
+                        mobilePanel.classList.remove('translate-x-0');
+                        document.body.style.overflow = '';
+                    });
+                    mobilePanel.addEventListener('click', (e) => {
+                        if (e.target === mobilePanel) {
+                            mobilePanel.classList.add('translate-x-full');
+                            mobilePanel.classList.remove('translate-x-0');
+                            document.body.style.overflow = '';
+                        }
+                    });
+                }
+                // Search overlay with organic nature design
+                const searchOpen = document.getElementById('searchBtnOrganic');
+                if (searchOpen) {
+                    const searchOverlayDiv = document.createElement('div');
+                    searchOverlayDiv.id = 'organicSearchModal';
+                    searchOverlayDiv.className = 'fixed inset-0 bg-sequoia-forest/85 backdrop-blur-xl z-50 flex items-center justify-center opacity-0 invisible transition-all duration-500';
+                    searchOverlayDiv.innerHTML = `
+          <div class="w-full max-w-xl mx-5 bg-sequoia-cream/95 rounded-3xl p-7 shadow-2xl border border-sequoia-sage/50 transform scale-95 transition-all">
+            <div class="flex justify-between items-center mb-5"><h3 class="font-heading text-2xl font-bold text-sequoia-deep"><i class="fas fa-search mr-2 text-sequoia-moss"></i>Найти вдохновение</h3><button id="closeSearchNature" class="text-sequoia-stone text-2xl"><i class="fas fa-times"></i></button></div>
+            <div class="relative"><i class="fas fa-leaf absolute left-4 top-1/2 -translate-y-1/2 text-sequoia-moss"></i><input type="text" placeholder="Поиск по ландшафту, проектам, услугам..." class="w-full pl-11 pr-4 py-4 rounded-2xl border border-sequoia-sage bg-white focus:ring-2 focus:ring-sequoia-moss outline-none text-sequoia-deep"></div>
+            <div class="flex gap-2 mt-5 flex-wrap"><span class="bg-sequoia-sage/30 px-3 py-1 rounded-full text-sm">ландшафтный дизайн</span><span class="bg-sequoia-sage/30 px-3 py-1 rounded-full text-sm">автополив</span><span class="bg-sequoia-sage/30 px-3 py-1 rounded-full text-sm">освещение сада</span><span class="bg-sequoia-sage/30 px-3 py-1 rounded-full text-sm">древесные растения</span></div>
+          </div>
+        `;
+                    document.body.appendChild(searchOverlayDiv);
+                    const closeSearchBtn = searchOverlayDiv.querySelector('#closeSearchNature');
+                    const openSearch = () => {
+                        searchOverlayDiv.classList.remove('opacity-0', 'invisible');
+                        searchOverlayDiv.classList.add('opacity-100', 'visible');
+                        document.body.style.overflow = 'hidden';
+                    };
+                    const closeSearchModal = () => {
+                        searchOverlayDiv.classList.add('opacity-0', 'invisible');
+                        searchOverlayDiv.classList.remove('opacity-100', 'visible');
+                        document.body.style.overflow = '';
+                    };
+                    searchOpen.addEventListener('click', openSearch);
+                    if (closeSearchBtn) closeSearchBtn.addEventListener('click', closeSearchModal);
+                    searchOverlayDiv.addEventListener('click', (e) => { if (e.target === searchOverlayDiv) closeSearchModal(); });
+                }
+            })();
+    </script>
+</body>
+
+</html>

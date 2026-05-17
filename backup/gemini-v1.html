@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Секвойя | Архитектура ландшафта</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sequoia-forest': '#1A3F2C',
+                        'sequoia-moss': '#4A6B3F',
+                        'sequoia-olive': '#6B7F59',
+                        'sequoia-sage': '#A3B89A',
+                        'sequoia-cream': '#FEF9E6',
+                    },
+                    fontFamily: {
+                        'heading': ['Montserrat', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FEF9E6;
+        }
+
+        /* The "Hillside" Clip-Path for the Header */
+        .organic-header {
+            clip-path: url(#header-curve);
+            background: linear-gradient(180deg, #ffffff 0%, #fcfbf4 100%);
+        }
+
+        /* Layered forest elements */
+        .forest-layer-1 {
+            opacity: 0.04;
+            transform: scale(1.2);
+            pointer-events: none;
+        }
+
+        .forest-layer-2 {
+            opacity: 0.02;
+            transform: scale(1.5) rotate(5deg);
+            pointer-events: none;
+        }
+
+        .nav-link-organic {
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link-organic::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #4A6B3F;
+            border-radius: 50% 20% 40% 10%;
+            transform: scale(0);
+            transition: transform 0.4s ease;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .nav-link-organic:hover::before {
+            transform: scale(1.2);
+        }
+
+        .nav-link-organic:hover {
+            color: #1A3F2C;
+            transform: translateY(-2px);
+        }
+
+        /* Custom shape for CTA */
+        .cta-organic {
+            border-radius: 60% 40% 70% 30% / 40% 50% 60% 40%;
+            transition: all 0.5s ease;
+        }
+
+        .cta-organic:hover {
+            border-radius: 40% 60% 30% 70% / 60% 40% 40% 60%;
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        #mobileMenu {
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+    </style>
+</head>
+
+<body class="font-body text-sequoia-forest bg-sequoia-cream antialiased">
+
+    <svg width="0" height="0" class="absolute">
+        <defs>
+            <clipPath id="header-curve" clipPathUnits="objectBoundingBox">
+                <path d="M0,0 L1,0 L1,0.85 C0.8,0.95 0.6,0.75 0.4,0.9 C0.2,1.05 0,0.85 0,0.85 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <header class="sticky top-0 z-50 w-full group">
+        <div class="hidden lg:block relative z-20 text-[11px] py-1.5 px-10 text-sequoia-olive/80">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex gap-6">
+                    <span class="flex items-center gap-1"><i class="fas fa-phone-alt"></i> +7 (800) 123-45-67</span>
+                    <span class="flex items-center gap-1"><i class="fab fa-telegram"></i> @sequoya</span>
+                </div>
+                <div class="flex gap-4">
+                    <i class="fab fa-instagram hover:text-sequoia-moss cursor-pointer transition"></i>
+                    <i class="fab fa-vk hover:text-sequoia-moss cursor-pointer transition"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="organic-header relative z-10 shadow-xl pb-10 -mb-8 transition-all duration-700">
+            <div
+                class="absolute inset-0 forest-layer-1 bg-[url('https://www.transparenttextures.com/patterns/leaves.png')]">
+            </div>
+            <div
+                class="absolute inset-0 forest-layer-2 bg-[url('https://www.transparenttextures.com/patterns/tree-bark.png')]">
+            </div>
+
+            <div class="container mx-auto px-6 py-4 relative z-20">
+                <div class="flex items-center justify-between">
+
+                    <div class="flex items-center gap-3">
+                        <div class="relative group">
+                            <div
+                                class="absolute -inset-2 bg-sequoia-moss/20 rounded-full blur-lg group-hover:bg-sequoia-moss/40 transition duration-500">
+                            </div>
+                            <div
+                                class="w-12 h-12 bg-sequoia-forest rounded-full flex items-center justify-center relative shadow-lg">
+                                <i class="fas fa-tree text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="leading-none">
+                            <h1 class="font-heading font-extrabold text-2xl tracking-tighter text-sequoia-forest">
+                                Секвойя</h1>
+                            <p class="text-[9px] font-bold text-sequoia-moss uppercase tracking-[0.2em]">Landscape
+                                Architecture</p>
+                        </div>
+                    </div>
+
+                    <nav
+                        class="hidden lg:flex items-center space-x-2 xl:space-x-4 bg-white/40 backdrop-blur-sm px-6 py-2 rounded-full border border-white/50 shadow-sm">
+                        <a href="/" class="nav-link-organic font-semibold text-sm">Главная</a>
+                        <a href="/services" class="nav-link-organic font-semibold text-sm">Услуги</a>
+                        <a href="/projects" class="nav-link-organic font-semibold text-sm">Проекты</a>
+                        <a href="/before-after" class="nav-link-organic font-semibold text-sm">До & После</a>
+                        <a href="/products" class="nav-link-organic font-semibold text-sm">Каталог</a>
+                        <a href="/about" class="nav-link-organic font-semibold text-sm">О компании</a>
+                    </nav>
+
+                    <div class="flex items-center gap-4">
+                        <button id="searchBtn" class="text-sequoia-forest/60 hover:text-sequoia-moss transition p-2">
+                            <i class="fas fa-search text-lg"></i>
+                        </button>
+                        <a href="/contact"
+                            class="cta-organic bg-sequoia-forest text-white px-8 py-3.5 text-sm font-bold shadow-lg hover:bg-sequoia-moss flex items-center gap-2">
+                            Обсудить проект <i class="fas fa-leaf text-xs opacity-70"></i>
+                        </a>
+                        <button id="mobileMenuToggle"
+                            class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 bg-sequoia-moss/10 rounded-full">
+                            <span class="w-5 h-0.5 bg-sequoia-forest rounded-full"></span>
+                            <span class="w-4 h-0.5 bg-sequoia-forest rounded-full self-end"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="searchOverlay"
+            class="absolute top-0 left-0 w-full h-32 bg-white/95 backdrop-blur-xl z-50 hidden border-b border-sequoia-sage/30 items-center justify-center px-10 animate-in slide-in-from-top duration-300">
+            <div class="relative w-full max-w-4xl">
+                <input type="text" placeholder="Поиск в лесу..."
+                    class="w-full bg-transparent border-b-2 border-sequoia-moss/30 py-4 text-2xl focus:outline-none focus:border-sequoia-moss text-sequoia-forest font-heading">
+                <button id="closeSearch"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 text-sequoia-stone hover:text-red-500"><i
+                        class="fas fa-times"></i></button>
+            </div>
+        </div>
+
+        <div id="mobileMenu"
+            class="lg:hidden absolute top-full left-0 w-full bg-white shadow-2xl overflow-hidden max-h-0 opacity-0 transition-all duration-500 z-40">
+            <nav class="flex flex-col p-8 space-y-6">
+                <a href="/services" class="text-xl font-bold border-b border-sequoia-sage/10 pb-2">Услуги</a>
+                <a href="/projects" class="text-xl font-bold border-b border-sequoia-sage/10 pb-2">Проекты</a>
+                <a href="/about" class="text-xl font-bold border-b border-sequoia-sage/10 pb-2">О питомнике</a>
+                <a href="/contact"
+                    class="bg-sequoia-moss text-white text-center py-4 rounded-2xl font-bold">Связаться</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="relative pt-24 pb-32">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative z-10">
+                    <span class="text-sequoia-moss font-bold tracking-widest text-xs uppercase mb-4 block">Premium
+                        Landscape Design</span>
+                    <h2 class="font-heading font-black text-5xl md:text-7xl leading-[1.1] text-sequoia-forest mb-8">
+                        Скульптура <br>вашей <span class="text-sequoia-moss italic">земли.</span>
+                    </h2>
+                    <p class="text-sequoia-olive text-lg max-w-md mb-10 leading-relaxed">Мы не просто сажаем деревья —
+                        мы проектируем экосистемы, которые дышат вместе с вашим домом.</p>
+                    <div class="flex gap-4">
+                        <button
+                            class="bg-sequoia-moss text-white px-10 py-4 rounded-full font-bold shadow-xl hover:shadow-sequoia-moss/20 transition">Смотреть
+                            работы</button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="aspect-square bg-sequoia-forest/5 rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] overflow-hidden shadow-inner">
+                        <img src="https://placehold.co/800x800/f3ecd9/1A3F2C?text=Nature+Art"
+                            class="w-full h-full object-cover mix-blend-multiply opacity-80" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Basic interaction logic
+        const mobileToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const closeSearch = document.getElementById('closeSearch');
+
+        mobileToggle.addEventListener('click', () => {
+            const isOpen = mobileMenu.style.maxHeight !== '0px';
+            mobileMenu.style.maxHeight = isOpen ? '0px' : '500px';
+            mobileMenu.style.opacity = isOpen ? '0' : '1';
+        });
+
+        searchBtn.addEventListener('click', () => {
+            searchOverlay.classList.remove('hidden');
+            searchOverlay.classList.add('flex');
+        });
+
+        closeSearch.addEventListener('click', () => {
+            searchOverlay.classList.add('hidden');
+        });
+    </script>
+</body>
+
+</html>

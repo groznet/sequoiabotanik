@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "slug": "private-residence-grozny",
+    "title": "Частная резиденция в Грозном",
+    "description": "Благоустройство 25 соток с водоёмом, альпийской горкой и вечерним освещением",
+    "location": "Грозный",
+    "category": "private"
+  },
+  {
+    "id": 2,
+    "slug": "city-park",
+    "title": "Городской парк им. Кадырова",
+    "description": "Озеленение 2 га территории, устройство фонтанов и прогулочных аллей",
+    "location": "Грозный",
+    "category": "urban"
+  },
+  {
+    "id": 3,
+    "slug": "restaurant-terrace",
+    "title": "Терраса ресторана «Le Jardin»",
+    "description": "Летняя зона с вертикальным озеленением, искусственным прудом и зоной отдыха",
+    "location": "Грозный",
+    "category": "commercial"
+  },
+  {
+    "id": 4,
+    "slug": "business-center",
+    "title": "Бизнес-центр «Аргун-Плаза»",
+    "description": "Входная группа и внутренний двор с лаунж-зоной для сотрудников",
+    "location": "Аргун",
+    "category": "commercial"
+  },
+  {
+    "id": 5,
+    "slug": "cottage-settlement",
+    "title": "Коттеджный посёлок «Зелёный бор»",
+    "description": "Ландшафт общественных зон, детские площадки и система автополива",
+    "location": "Грозный",
+    "category": "private"
+  },
+  {
+    "id": 6,
+    "slug": "school-garden",
+    "title": "Школьный сад в Гудермесе",
+    "description": "Благоустройство территории школы: учебный огород, спортивная зона и цветники",
+    "location": "Гудермес",
+    "category": "urban"
+  },
+  {
+    "id": 7,
+    "slug": "rooftop-terrace",
+    "title": "Эко-терраса на крыше офиса",
+    "description": "Озеленение крыши с зоной барбекю и панорамным видом на город",
+    "location": "Грозный",
+    "category": "commercial"
+  },
+  {
+    "id": 8,
+    "slug": "country-house-mountain",
+    "title": "Загородный дом в горах",
+    "description": "Ландшафт с уклоном, каменные подпорные стены и хвойный сад",
+    "location": "Ножай-Юрт",
+    "category": "private"
+  }
+]

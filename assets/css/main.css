@@ -1,0 +1,60 @@
+/* Smooth scrollbar hiding when mobile menu open */
+
+body.menu-open {
+    overflow: hidden;
+    touch-action: none;
+}
+/* Mega menu hover intent bridge - invisible connector to prevent menu from closing */
+
+.mega-menu-bridge {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: transparent;
+    pointer-events: auto;
+    z-index: 48;
+}
+/* Subtle gradient overlay for hero */
+
+.hero-gradient-overlay {
+    background: linear-gradient(180deg, rgba(21, 41, 32, 0.55) 0%, rgba(31, 61, 43, 0.4) 30%, rgba(31, 61, 43, 0.65) 70%, rgba(21, 41, 32, 0.85) 100%);
+}
+
+.hero-gradient-side {
+    background: radial-gradient(ellipse at 30% 50%, rgba(214, 168, 90, 0.15) 0%, transparent 60%), radial-gradient(ellipse at 75% 40%, rgba(76, 122, 90, 0.2) 0%, transparent 55%);
+}
+/* Organic decorative shape */
+
+.organic-blob {
+    border-radius: 42% 58% 63% 37% / 38% 45% 55% 62%;
+    animation: blobMorph 14s ease-in-out infinite;
+}
+
+@keyframes blobMorph {
+    0%,
+    100% {
+        border-radius: 42% 58% 63% 37% / 38% 45% 55% 62%;
+    }
+    25% {
+        border-radius: 55% 45% 48% 52% / 55% 38% 62% 45%;
+    }
+    50% {
+        border-radius: 38% 62% 42% 58% / 52% 55% 45% 48%;
+    }
+    75% {
+        border-radius: 48% 52% 55% 45% / 42% 58% 42% 58%;
+    }
+}
+/* Nav transition for sticky */
+
+.nav-transition {
+    transition: background-color 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+}
+/* Search overlay backdrop */
+
+.search-backdrop {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}

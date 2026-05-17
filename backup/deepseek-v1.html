@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Секвойя | Архитектура ландшафта</title>
+    <!-- Google Fonts: Montserrat (Headings) + Inter (Body) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- TailwindCSS v3 + custom base layer -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- custom configuration to override default theme & add extra utilities -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sequoia-forest': '#1A3F2C',
+                        'sequoia-moss': '#4A6B3F',
+                        'sequoia-olive': '#6B7F59',
+                        'sequoia-sage': '#A3B89A',
+                        'sequoia-cream': '#FEF9E6',
+                        'sequoia-sand': '#ECE6D8',
+                        'sequoia-earth': '#7A5C4A',
+                        'sequoia-stone': '#5E675B',
+                    },
+                    fontFamily: {
+                        'heading': ['Montserrat', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 30px -12px rgba(0, 0, 0, 0.08)',
+                        'elevated': '0 20px 35px -12px rgba(0, 0, 0, 0.12)',
+                    },
+                    borderRadius: {
+                        'xl': '1.25rem',
+                        '2xl': '1.75rem',
+                    },
+                    backgroundImage: {
+                        'leaf-texture': "url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%234a6b3f\" opacity=\"0.03\"%3E%3Cpath d=\"M12,2C9,7,4,9,4,14c0,4,4,6,8,6s8-2,8-6C20,9,15,7,12,2z\"%3E%3C/path%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* custom smooth scroll & selection */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #FEF9E6;
+        }
+
+        /* Custom leaf-pattern overlay for hero (light organic touch) */
+        .hero-grass-blur {
+            background: radial-gradient(circle at 10% 30%, rgba(74, 107, 63, 0.05) 0%, rgba(26, 63, 44, 0.02) 80%);
+        }
+
+        .nav-link-hover {
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #4A6B3F;
+            transition: width 0.25s ease-out;
+            border-radius: 2px;
+        }
+
+        .nav-link-hover:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-active {
+            max-height: 100vh;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* subtle focus ring for accessibility */
+        .focus-ring:focus {
+            outline: none;
+            ring: 2px solid #4A6B3F;
+            ring-offset: 2px;
+        }
+    </style>
+</head>
+
+<body class="font-body text-sequoia-forest bg-sequoia-cream antialiased">
+    <!-- 
+    ==================================================
+    MOBILE-FIRST HEADER with mega menu, rich elements,
+    contact bar, logo, CTA, and interactive mobile menu
+    ==================================================
+  -->
+    <header class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md shadow-soft border-b border-sequoia-sage/20">
+        <!-- Top contact bar (hidden on smallest phones? visible but compact) -->
+        <div class="hidden lg:block bg-sequoia-forest/5 text-sm py-2 border-b border-sequoia-sage/15">
+            <div class="container mx-auto px-5 flex flex-wrap justify-between items-center gap-2">
+                <div class="flex flex-wrap items-center gap-4 text-sequoia-stone">
+                    <div class="flex items-center gap-1.5"><i class="fas fa-phone-alt text-sequoia-moss text-xs"></i><a
+                            href="tel:+78001234567" class="hover:text-sequoia-forest transition">+7 (800)
+                            123-45-67</a><span class="text-xs text-sequoia-olive">| WhatsApp</span></div>
+                    <div class="flex items-center gap-1.5"><i class="fas fa-envelope text-sequoia-moss text-xs"></i><a
+                            href="mailto:info@sequoya.ru"
+                            class="hover:text-sequoia-forest transition">info@sequoya.ru</a></div>
+                    <div class="flex items-center gap-1.5"><i class="fab fa-telegram text-sequoia-moss"></i><a
+                            href="https://t.me/sequoya" target="_blank" rel="noopener"
+                            class="hover:text-sequoia-forest transition">@sequoya</a></div>
+                </div>
+                <div class="flex gap-3 text-sequoia-stone">
+                    <a href="#" aria-label="Instagram" class="hover:text-sequoia-moss transition"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="VK" class="hover:text-sequoia-moss transition"><i class="fab fa-vk"></i></a>
+                    <a href="#" aria-label="YouTube" class="hover:text-sequoia-moss transition"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main navigation container -->
+        <div class="container mx-auto px-4 md:px-6 py-3 md:py-4">
+            <div class="flex items-center justify-between gap-4">
+                <!-- Logo + brand identity -->
+                <div class="flex items-center gap-2 shrink-0">
+                    <div
+                        class="w-9 h-9 md:w-11 md:h-11 bg-sequoia-forest rounded-xl flex items-center justify-center shadow-sm">
+                        <i class="fas fa-tree text-white text-lg md:text-xl"></i>
+                    </div>
+                    <div class="leading-tight">
+                        <h1 class="font-heading font-bold text-xl md:text-2xl tracking-tight text-sequoia-forest">
+                            Секвойя</h1>
+                        <p class="text-[10px] md:text-xs font-medium text-sequoia-olive -mt-0.5 hidden sm:block">
+                            АРХИТЕКТУРА ЛАНДШАФТА</p>
+                    </div>
+                </div>
+
+                <!-- Desktop navigation (lg+) -->
+                <nav class="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                    <a href="/"
+                        class="nav-link-hover font-medium text-sequoia-forest/85 hover:text-sequoia-forest transition">Главная</a>
+                    <a href="/services"
+                        class="nav-link-hover font-medium text-sequoia-forest/85 hover:text-sequoia-forest transition">Услуги</a>
+                    <a href="/projects"
+                        class="nav-link-hover font-medium text-sequoia-forest/85 hover:text-sequoia-forest transition">Проекты</a>
+                    <a href="/before-after"
+                        class="nav-link-hover font-medium text-sequoia-forest/85 hover:text-sequoia-forest transition">До
+                        & После</a>
+                    <a href="/products"
+                        class="nav-link-hover font-medium text-sequoia-forest/85 hover:text-sequoia-forest transition">Каталог</a>
+                    <a href="/about"
+                        class="nav-link-hover font-medium text-sequoia-forest/85 hover:text-sequoia-forest transition">О
+                        компании</a>
+                    <a href="/contact"
+                        class="nav-link-hover font-medium text-sequoia-forest/85 hover:text-sequoia-forest transition">Контакты</a>
+                </nav>
+
+                <!-- Right side: CTA + search + mobile toggle -->
+                <div class="flex items-center gap-3 md:gap-4">
+                    <!-- Search icon desktop -->
+                    <button id="searchBtn"
+                        class="hidden md:flex text-sequoia-stone hover:text-sequoia-moss transition text-xl focus-ring rounded-full p-1"
+                        aria-label="Поиск">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <!-- Call to action button (desktop) -->
+                    <a href="/contact"
+                        class="hidden md:inline-block bg-sequoia-moss hover:bg-sequoia-forest text-white font-semibold py-2.5 px-5 rounded-full text-sm transition-all duration-300 shadow-md hover:shadow-elevated active:scale-95">
+                        <i class="fas fa-leaf mr-1.5"></i> Обсудить проект
+                    </a>
+                    <!-- Mobile menu toggle button (hamburger) -->
+                    <button id="mobileMenuToggle"
+                        class="lg:hidden flex flex-col items-center justify-center w-10 h-10 rounded-xl bg-sequoia-sage/10 hover:bg-sequoia-sage/25 transition focus-ring"
+                        aria-label="Меню" aria-expanded="false">
+                        <span
+                            class="block w-5 h-0.5 bg-sequoia-forest rounded-full mb-1 transition-transform duration-200"></span>
+                        <span
+                            class="block w-5 h-0.5 bg-sequoia-forest rounded-full mb-1 transition-all duration-200"></span>
+                        <span class="block w-5 h-0.5 bg-sequoia-forest rounded-full transition-all duration-200"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile dropdown menu (expanded / collapsible) -->
+            <div id="mobileMenu"
+                class="lg:hidden overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0 invisible mt-0 border-t border-sequoia-sage/20">
+                <nav class="flex flex-col py-5 space-y-4 text-base font-medium">
+                    <a href="/"
+                        class="flex items-center gap-3 text-sequoia-forest hover:text-sequoia-moss transition px-2 py-1 rounded-lg"><i
+                            class="fas fa-home w-5 text-sequoia-olive"></i>Главная</a>
+                    <a href="/services"
+                        class="flex items-center gap-3 text-sequoia-forest hover:text-sequoia-moss transition px-2 py-1 rounded-lg"><i
+                            class="fas fa-seedling w-5 text-sequoia-olive"></i>Услуги</a>
+                    <a href="/projects"
+                        class="flex items-center gap-3 text-sequoia-forest hover:text-sequoia-moss transition px-2 py-1 rounded-lg"><i
+                            class="fas fa-draw-polygon w-5 text-sequoia-olive"></i>Проекты</a>
+                    <a href="/before-after"
+                        class="flex items-center gap-3 text-sequoia-forest hover:text-sequoia-moss transition px-2 py-1 rounded-lg"><i
+                            class="fas fa-images w-5 text-sequoia-olive"></i>До & После</a>
+                    <a href="/products"
+                        class="flex items-center gap-3 text-sequoia-forest hover:text-sequoia-moss transition px-2 py-1 rounded-lg"><i
+                            class="fas fa-boxes w-5 text-sequoia-olive"></i>Каталог товаров</a>
+                    <a href="/blog"
+                        class="flex items-center gap-3 text-sequoia-forest hover:text-sequoia-moss transition px-2 py-1 rounded-lg"><i
+                            class="fas fa-pen-fancy w-5 text-sequoia-olive"></i>Статьи</a>
+                    <a href="/about"
+                        class="flex items-center gap-3 text-sequoia-forest hover:text-sequoia-moss transition px-2 py-1 rounded-lg"><i
+                            class="fas fa-leaf w-5 text-sequoia-olive"></i>О питомнике</a>
+                    <a href="/contact"
+                        class="flex items-center gap-3 text-sequoia-forest hover:text-sequoia-moss transition px-2 py-1 rounded-lg"><i
+                            class="fas fa-phone-alt w-5 text-sequoia-olive"></i>Контакты</a>
+                    <div class="pt-3 mt-2 border-t border-sequoia-sage/20 flex flex-wrap gap-4">
+                        <a href="tel:+78001234567" class="text-sm flex items-center gap-2 text-sequoia-stone"><i
+                                class="fas fa-phone-alt text-sequoia-moss"></i>+7 (800) 123-45-67</a>
+                        <a href="https://t.me/sequoya" target="_blank"
+                            class="text-sm flex items-center gap-2 text-sequoia-stone"><i
+                                class="fab fa-telegram text-sequoia-moss"></i>Telegram</a>
+                    </div>
+                    <div class="flex gap-5 pt-2 text-sequoia-stone">
+                        <a href="#" class="hover:text-sequoia-moss"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="#" class="hover:text-sequoia-moss"><i class="fab fa-vk text-lg"></i></a>
+                        <a href="#" class="hover:text-sequoia-moss"><i class="fab fa-youtube text-lg"></i></a>
+                    </div>
+                    <a href="/contact"
+                        class="mt-3 bg-sequoia-moss text-white text-center font-semibold py-3 px-4 rounded-full w-full transition hover:bg-sequoia-forest shadow-md">Запросить
+                        консультацию</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- floating search bar (hidden by default, slides down) -->
+        <div id="searchOverlay"
+            class="absolute top-full left-0 w-full bg-white/95 backdrop-blur-lg shadow-elevated border-b border-sequoia-sage/30 hidden overflow-hidden transition-all duration-300 z-40">
+            <div class="container mx-auto px-5 py-5">
+                <div class="relative">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-sequoia-olive"></i>
+                    <input type="text" placeholder="Поиск по услугам, проектам или товарам..."
+                        class="w-full pl-11 pr-12 py-3 rounded-2xl border border-sequoia-sage/40 bg-sequoia-cream/50 focus:outline-none focus:ring-2 focus:ring-sequoia-moss text-sequoia-forest">
+                    <button id="closeSearch"
+                        class="absolute right-4 top-1/2 -translate-y-1/2 text-sequoia-stone hover:text-sequoia-forest"><i
+                            class="fas fa-times"></i></button>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs text-sequoia-olive">
+                    <span class="bg-sequoia-sage/20 px-2 py-1 rounded-full">благоустройство</span>
+                    <span class="bg-sequoia-sage/20 px-2 py-1 rounded-full">озеленение</span>
+                    <span class="bg-sequoia-sage/20 px-2 py-1 rounded-full">ландшафтный дизайн</span>
+                    <span class="bg-sequoia-sage/20 px-2 py-1 rounded-full">автополив</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN HERO SECTION (to showcase how header works with rich hero) -->
+    <main>
+        <section
+            class="relative overflow-hidden bg-gradient-to-br from-sequoia-cream via-white to-sequoia-sand/30 pt-8 pb-20 md:pt-12 md:pb-28">
+            <!-- background subtle leaf texture (css pseudo) -->
+            <div class="absolute inset-0 opacity-20 bg-leaf-texture pointer-events-none"></div>
+            <div class="container mx-auto px-5 relative z-10">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span
+                            class="inline-block bg-sequoia-moss/10 text-sequoia-moss rounded-full px-4 py-1.5 text-sm font-semibold tracking-wide mb-5 backdrop-blur-sm"><i
+                                class="fas fa-certificate mr-1"></i> 15+ лет экспертизы</span>
+                        <h1
+                            class="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl leading-tight text-sequoia-forest mb-5">
+                            Создаём живую <span class="text-sequoia-moss">архитектуру</span> ландшафта</h1>
+                        <p class="text-sequoia-stone text-lg md:text-xl max-w-lg mb-7 leading-relaxed">Благоустройство и
+                            озеленение в Чечне и регионах России. Премиальный подход, европейские технологии,
+                            экологичность.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="/services"
+                                class="bg-sequoia-moss hover:bg-sequoia-forest text-white font-semibold py-3 px-7 rounded-full transition-all shadow-md hover:shadow-elevated flex items-center gap-2"><i
+                                    class="fas fa-arrow-right"></i> Наши услуги</a>
+                            <a href="/projects"
+                                class="border-2 border-sequoia-olive/60 hover:border-sequoia-moss text-sequoia-forest hover:text-sequoia-moss font-semibold py-3 px-7 rounded-full transition-all backdrop-blur-sm"><i
+                                    class="far fa-images mr-1"></i> Портфолио</a>
+                        </div>
+                        <div class="flex gap-6 mt-8 text-sequoia-stone text-sm">
+                            <div class="flex items-center gap-2"><i
+                                    class="fas fa-check-circle text-sequoia-moss"></i><span>Фестивали садового
+                                    искусства</span></div>
+                            <div class="flex items-center gap-2"><i
+                                    class="fas fa-check-circle text-sequoia-moss"></i><span>Гарантия 5 лет</span></div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="bg-sequoia-forest/5 rounded-3xl overflow-hidden shadow-elevated relative">
+                            <img src="https://placehold.co/600x500/f3ecd9/4A6B3F?text=Landscape+design"
+                                alt="Ландшафтный проект"
+                                class="w-full h-auto object-cover mix-blend-multiply hover:scale-105 transition duration-700">
+                        </div>
+                        <div
+                            class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-soft hidden md:flex items-center gap-3">
+                            <div class="bg-sequoia-sage/20 rounded-full p-2"><i
+                                    class="fas fa-leaf text-sequoia-forest text-xl"></i></div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-sequoia-olive">реализовано проектов</p>
+                                <p class="font-bold text-2xl text-sequoia-forest">250+</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick intro component (so header context is fully integrated) -->
+        <section class="py-16 bg-white/40">
+            <div class="container mx-auto px-5 text-center">
+                <h2 class="font-heading font-bold text-3xl md:text-4xl text-sequoia-forest mb-5">Архитектура,
+                    вдохновлённая природой</h2>
+                <p class="text-sequoia-stone max-w-3xl mx-auto text-lg">Ландшафтная компания «Секвойя» уже более 15 лет
+                    создаёт комфортную и гармоничную среду. Мы объединяем передовые технологии и естественную красоту.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
+                    <div class="p-6 bg-white rounded-2xl shadow-soft border border-sequoia-sage/20"><i
+                            class="fas fa-trophy text-3xl text-sequoia-moss mb-3"></i>
+                        <h3 class="font-bold text-xl">Призёры конкурсов</h3>
+                        <p class="text-sequoia-stone text-sm mt-1">Участники фестивалей садово-паркового искусства</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl shadow-soft border border-sequoia-sage/20"><i
+                            class="fas fa-globe-asia text-3xl text-sequoia-moss mb-3"></i>
+                        <h3 class="font-bold text-xl">По всей России</h3>
+                        <p class="text-sequoia-stone text-sm mt-1">Чечня, юг РФ и другие регионы</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl shadow-soft border border-sequoia-sage/20"><i
+                            class="fas fa-hand-holding-heart text-3xl text-sequoia-moss mb-3"></i>
+                        <h3 class="font-bold text-xl">Экологичность</h3>
+                        <p class="text-sequoia-stone text-sm mt-1">Оптимальные решения для вашего участка</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-sequoia-forest/5 border-t border-sequoia-sage/30 py-8 text-center text-sequoia-stone text-sm">
+        <p>© 2025 Секвойя — архитектура ландшафта. ул. Асланбека Шерипова, 61. Грозный, Чечня</p>
+    </footer>
+
+    <!-- JavaScript for mobile menu & search toggle (fully interactive) -->
+    <script>
+            (function () {
+                const mobileToggle = document.getElementById('mobileMenuToggle');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const searchBtn = document.getElementById('searchBtn');
+                const searchOverlay = document.getElementById('searchOverlay');
+                const closeSearch = document.getElementById('closeSearch');
+
+                // mobile menu toggle with accessibility
+                function toggleMobileMenu(forceState) {
+                    const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+                    const newState = forceState !== undefined ? forceState : !isExpanded;
+
+                    if (newState) {
+                        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+                        mobileMenu.style.opacity = '1';
+                        mobileMenu.style.visibility = 'visible';
+                        mobileToggle.setAttribute('aria-expanded', 'true');
+                        // animate hamburger to X (optional style)
+                        const spans = mobileToggle.querySelectorAll('span');
+                        if (spans.length === 3) {
+                            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                            spans[1].style.opacity = '0';
+                            spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+                        }
+                    } else {
+                        mobileMenu.style.maxHeight = '0';
+                        mobileMenu.style.opacity = '0';
+                        mobileMenu.style.visibility = 'hidden';
+                        mobileToggle.setAttribute('aria-expanded', 'false');
+                        const spans = mobileToggle.querySelectorAll('span');
+                        if (spans.length === 3) {
+                            spans[0].style.transform = 'none';
+                            spans[1].style.opacity = '1';
+                            spans[2].style.transform = 'none';
+                        }
+                    }
+                }
+
+                if (mobileToggle && mobileMenu) {
+                    mobileToggle.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        toggleMobileMenu();
+                    });
+                    // close menu on link click inside for better UX on mobile
+                    const mobileLinks = mobileMenu.querySelectorAll('a');
+                    mobileLinks.forEach(link => {
+                        link.addEventListener('click', () => {
+                            if (window.innerWidth < 1024) {
+                                toggleMobileMenu(false);
+                            }
+                        });
+                    });
+                }
+
+                // search overlay logic
+                if (searchBtn && searchOverlay && closeSearch) {
+                    searchBtn.addEventListener('click', () => {
+                        const isHidden = searchOverlay.classList.contains('hidden');
+                        if (isHidden) {
+                            searchOverlay.classList.remove('hidden');
+                            searchOverlay.style.maxHeight = '300px';
+                            // focus input
+                            const input = searchOverlay.querySelector('input');
+                            if (input) setTimeout(() => input.focus(), 80);
+                        } else {
+                            searchOverlay.classList.add('hidden');
+                        }
+                    });
+                    closeSearch.addEventListener('click', () => {
+                        searchOverlay.classList.add('hidden');
+                    });
+                    // optional click outside closes search? not mandatory but elegant: document click
+                    document.addEventListener('click', (e) => {
+                        if (!searchOverlay.contains(e.target) && !searchBtn.contains(e.target) && !searchOverlay.classList.contains('hidden')) {
+                            searchOverlay.classList.add('hidden');
+                        }
+                    });
+                }
+
+                // handle resize: if window becomes wider than lg, close mobile menu and reset styles
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 1024) {
+                        if (mobileMenu && mobileMenu.style.maxHeight !== '0px') {
+                            mobileMenu.style.maxHeight = '0';
+                            mobileMenu.style.opacity = '0';
+                            mobileMenu.style.visibility = 'hidden';
+                            if (mobileToggle) {
+                                mobileToggle.setAttribute('aria-expanded', 'false');
+                                const spans = mobileToggle.querySelectorAll('span');
+                                if (spans.length === 3) {
+                                    spans[0].style.transform = 'none';
+                                    spans[1].style.opacity = '1';
+                                    spans[2].style.transform = 'none';
+                                }
+                            }
+                        }
+                    }
+                });
+            })();
+    </script>
+</body>
+
+</html>

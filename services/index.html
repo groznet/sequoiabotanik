@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги — Секвойя | Ландшафтное проектирование, озеленение, благоустройство</title>
+    <meta name="description" content="Полный спектр услуг по благоустройству, озеленению и уходу за территориями от компании «Секвойя». Проектирование, автополив, ландшафтный дизайн.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1F3D2B',
+                        'primary-light': '#2A5538',
+                        'primary-dark': '#152920',
+                        secondary: '#4C7A5A',
+                        'secondary-light': '#5E916D',
+                        accent: '#D6A85A',
+                        'accent-light': '#E0BC7A',
+                        'accent-dark': '#C4963D',
+                        background: '#F7F9F5',
+                        surface: '#FFFFFF',
+                        text: '#1A1A1A',
+                        muted: '#7A807A',
+                        'muted-light': '#A5AAA5',
+                        'border-soft': '#E5E8E3',
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        sm: '0.25rem',
+                        md: '0.5rem',
+                        lg: '1rem',
+                        xl: '1.25rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                        full: '9999px',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.4s ease-out',
+                        'fade-in-up': 'fadeInUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+    
+    <!-- Minimal custom styles -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="font-body text-text bg-background antialiased overflow-x-hidden">
+    <!-- Header loaded dynamically -->
+    	<header class="relative z-50" id="site-header">
+        <!-- ========== ANNOUNCEMENT BAR ========== -->
+        <div id="announcement-bar" class="relative bg-primary-dark text-white overflow-hidden transition-all duration-400" style="max-height: 48px;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between py-2.5 text-sm">
+                    <div class="flex items-center gap-2.5 flex-1 min-w-0">
+                        <!-- Animated dot --><span class="relative flex h-2.5 w-2.5 flex-shrink-0">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60"></span> <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span> </span>
+                        <p class="truncate text-white/90 font-medium tracking-wide"> 🌿 <span class="hidden xs:inline">Сезонное предложение —</span> скидка 15% на ландшафтное проектирование до конца месяца </p>
+                    </div>
+                    <div class="hidden md:flex items-center gap-4 flex-shrink-0 ml-4"> <a href="/promotions" class="text-accent-light hover:text-accent transition-colors duration-200 text-xs font-semibold uppercase tracking-wider whitespace-nowrap underline-offset-4 hover:underline">
+                        Подробнее →
+                    </a>
+                        <button id="close-announcement" class="text-white/60 hover:text-white transition-colors duration-200 flex-shrink-0 p-0.5 rounded-full hover:bg-white/10" aria-label="Закрыть объявление">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /> </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ========== TOP CONTACT BAR (Desktop) ========== -->
+        <div class="hidden lg:block bg-surface border-b border-border-soft">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between py-2 text-sm text-muted">
+                    <!-- Left: contact info -->
+                    <div class="flex items-center gap-6">
+                        <a href="tel:+78001234567" class="flex items-center gap-2 hover:text-secondary transition-colors duration-200 group">
+                            <svg class="w-4 h-4 text-secondary group-hover:text-secondary-light transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /> </svg> <span class="font-medium text-text">+7 (800) 123-45-67</span> </a>
+                        <a href="mailto:info@sequoya.ru" class="flex items-center gap-2 hover:text-secondary transition-colors duration-200 group">
+                            <svg class="w-4 h-4 text-secondary group-hover:text-secondary-light transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /> </svg> <span>info@sequoya.ru</span> </a> <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>ул. Асланбека Шерипова, 61, Грозный</span> </span>
+                    </div>
+                    <!-- Right: social links -->
+                    <div class="flex items-center gap-3">
+                        <a href="https://t.me/sequoya" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full flex items-center justify-center text-muted hover:text-white hover:bg-[#2AABEE] transition-all duration-200" aria-label="Telegram">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.26.332-.54.332-.352 0-.292-.133-.414-.472l-.94-3.086-2.668-.83c-.644-.2-.66-.644.136-.954l10.443-4.024c.476-.18.893.115.738.744z" />
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/sequoya" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full flex items-center justify-center text-muted hover:text-white hover:bg-[#E4405F] transition-all duration-200" aria-label="Instagram">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                            </svg>
+                        </a>
+                        <a href="https://vk.com/sequoya" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full flex items-center justify-center text-muted hover:text-white hover:bg-[#0077FF] transition-all duration-200" aria-label="VK">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M15.684 0H8.316C3.724 0 0 3.724 0 8.316v7.368C0 20.276 3.724 24 8.316 24h7.368C20.276 24 24 20.276 24 15.684V8.316C24 3.724 20.276 0 15.684 0zm3.692 17.123h-1.764c-.66 0-.862-.523-2.041-1.72-1.031-1.005-1.484-1.136-1.736-1.136-.355 0-.457.102-.457.596v1.575c0 .425-.136.68-1.268.68-1.87 0-3.947-1.137-5.407-3.24-2.211-3.14-2.817-5.495-2.817-5.978 0-.262.102-.51.594-.51h1.763c.443 0 .61.204.78.68.866 2.524 2.316 4.738 2.912 4.738.227 0 .33-.102.33-.663V9.86c-.073-1.194-.69-1.294-.69-1.72 0-.204.17-.408.443-.408h2.775c.374 0 .51.204.51.646v3.483c0 .373.17.51.272.51.228 0 .413-.136.826-.578 1.276-1.429 2.188-3.638 2.188-3.638.114-.255.286-.425.73-.425h1.763c.527 0 .646.272.527.663-.22.969-2.22 3.8-2.22 3.8-.178.288-.247.425 0 .747.178.254.763.754 1.152 1.213.713.832 1.26 1.534 1.412 2.006.153.467-.1.68-.56.68z" />
+                            </svg>
+                        </a>
+                        <a href="https://youtube.com/@sequoya" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full flex items-center justify-center text-muted hover:text-white hover:bg-[#FF0000] transition-all duration-200" aria-label="YouTube">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ========== MAIN NAVIGATION ========== -->
+        <div class="relative nav-transition bg-surface/95 backdrop-blur-md border-b border-transparent shadow-sm" id="main-navbar">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-[68px] lg:h-[76px] gap-4">
+                    <!-- Logo -->
+                    <a href="/" class="flex-shrink-0 flex items-center gap-2.5 group z-10" aria-label="Секвойя — Главная">
+                        <!-- Logo icon: stylized sequoia tree -->
+                        <div class="relative w-10 h-10 lg:w-11 lg:h-11 flex items-center justify-center rounded-full bg-primary group-hover:bg-primary-light transition-colors duration-300">
+                            <svg class="w-6 h-6 lg:w-7 lg:h-7 text-accent" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 2 L16 30 M16 6 C20 2 26 4 26 10 C26 16 20 18 16 22 M16 6 C12 2 6 4 6 10 C6 16 12 18 16 22 M16 22 L16 30 M10 26 L22 26" /> </svg>
+                        </div>
+                        <div class="flex flex-col"> <span class="font-heading text-xl lg:text-2xl font-bold text-primary leading-tight tracking-tight group-hover:text-primary-light transition-colors duration-300">
+                    Секвойя
+                </span> <span class="text-[10px] lg:text-[11px] text-muted uppercase tracking-[0.18em] font-medium leading-none">
+                    Архитектура ландшафта
+                </span> </div>
+                    </a>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Основная навигация">
+                        <!-- Services Mega Menu Trigger -->
+                        <div class="relative mega-menu-parent">
+                            <button class="px-3 xl:px-4 py-2.5 rounded-full text-[15px] font-medium text-text hover:text-primary hover:bg-background transition-all duration-200 flex items-center gap-1.5 group nav-trigger" data-mega="services-mega" aria-expanded="false" aria-haspopup="true"> Услуги
+                                <svg class="w-3.5 h-3.5 text-muted group-hover:text-primary transition-all duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /> </svg>
+                            </button>
+                        </div>
+                        <div class="relative mega-menu-parent">
+
+                            <button class="px-3 xl:px-4 py-2.5 rounded-full text-[15px] font-medium text-text hover:text-primary hover:bg-background transition-all duration-200 flex items-center gap-1.5 group nav-trigger" data-mega="projects-mega" aria-expanded="false" aria-haspopup="true"> Проекты
+
+                                <svg class="w-3.5 h-3.5 text-muted group-hover:text-primary transition-all duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /> </svg>
+
+                            </button>
+
+                        </div>
+                        <!-- Catalog Mega Menu Trigger (Clickable to /catalog) -->
+                        <div class="relative mega-menu-parent">
+                            <a href="/catalog" class="px-3 xl:px-4 py-2.5 rounded-full text-[15px] font-medium text-text hover:text-primary hover:bg-background transition-all duration-200 inline-flex items-center gap-1.5 group nav-trigger" data-mega="catalog-mega" aria-expanded="false" aria-haspopup="true"> 
+                                Каталог
+                                <svg class="w-3.5 h-3.5 text-muted group-hover:text-primary transition-all duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /> 
+                                </svg>
+                            </a>
+                        </div>
+                        <!-- Gallery Link --><a href="/gallery" class="px-3 xl:px-4 py-2.5 rounded-full text-[15px] font-medium text-text hover:text-primary hover:bg-background transition-all duration-200">
+        Галерея
+        </a>
+                        <!-- About Link (Replaced dropdown with a direct link) -->
+                        <a href="/about" class="px-3 xl:px-4 py-2.5 rounded-full text-[15px] font-medium text-text hover:text-primary hover:bg-background transition-all duration-200">
+                            О нас
+                        </a>
+                        <!-- Contact Link -->
+                        <a href="/contact" class="px-3 xl:px-4 py-2.5 rounded-full text-[15px] font-medium text-text hover:text-primary hover:bg-background transition-all duration-200">
+        Контакты
+        </a> </nav>
+                    <!-- Right actions -->
+                    <div class="flex items-center gap-2 lg:gap-3 flex-shrink-0 z-10">
+                        <!-- Search button -->
+                        <button id="search-toggle" class="w-10 h-10 lg:w-9 lg:h-9 rounded-full flex items-center justify-center text-text hover:text-primary hover:bg-background transition-all duration-200" aria-label="Поиск по сайту">
+                            <svg class="w-5 h-5 lg:w-4.5 lg:h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>
+                        </button>
+                        <!-- CTA Button (Desktop) -->
+                        <a href="/contact#form" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-dark text-primary-dark font-semibold text-sm rounded-full transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] shadow-sm hover:shadow-md whitespace-nowrap"> <span>Заказать звонок</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /> </svg>
+                        </a>
+                        <!-- Mobile menu toggle -->
+                        <button id="mobile-menu-toggle" class="lg:hidden w-10 h-10 rounded-full flex items-center justify-center text-text hover:text-primary hover:bg-background transition-all duration-200 relative" aria-label="Открыть меню" aria-expanded="false"> <span class="sr-only">Меню</span>
+                            <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /> </svg>
+                            <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /> </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- ========== MEGA MENUS CONTAINER (Desktop) ========== -->
+            <div class="hidden lg:block absolute top-full left-0 right-0 pointer-events-none" id="mega-menus-container">
+                <!-- Bridge for hover intent -->
+                <div class="mega-menu-bridge hidden" id="mega-menu-bridge"></div>
+                <!-- === SERVICES MEGA MENU === -->
+                <div id="services-mega" class="absolute left-1/2 -translate-x-1/2 w-[min(1100px,95vw)] bg-surface rounded-2xl shadow-2xl border border-border-soft p-0 opacity-0 invisible pointer-events-none transition-all duration-300 transform -translate-y-2 scale-[0.98]" style="top: 8px;">
+                    <div class="grid grid-cols-12 gap-0">
+                        <!-- Main links columns -->
+                        <div class="col-span-8 p-8 pr-4">
+                            <div class="grid grid-cols-2 gap-x-8 gap-y-1">
+                                <!-- Column 1 -->
+                                <div>
+                                    <p class="text-xs font-semibold uppercase tracking-wider text-muted mb-4">Проектирование &amp; Дизайн</p>
+                                    <ul class="space-y-2.5">
+                                        <li>
+                                            <a href="/service/landscape-design" class="flex items-start gap-3 group py-1.5 -ml-2 px-2 rounded-lg hover:bg-background transition-colors duration-150"> <span class="text-accent text-lg leading-none mt-0.5">🌿</span>
+                                                <div> <span class="text-[15px] font-medium text-text group-hover:text-primary transition-colors">Ландшафтное проектирование</span>
+                                                    <p class="text-xs text-muted mt-0.5">Индивидуальный дизайн-проект участка</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/service/territory-planning" class="flex items-start gap-3 group py-1.5 -ml-2 px-2 rounded-lg hover:bg-background transition-colors duration-150"> <span class="text-accent text-lg leading-none mt-0.5">📐</span>
+                                                <div> <span class="text-[15px] font-medium text-text group-hover:text-primary transition-colors">Планировка территории</span>
+                                                    <p class="text-xs text-muted mt-0.5">Зонирование и генплан участка</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/service/dendrology" class="flex items-start gap-3 group py-1.5 -ml-2 px-2 rounded-lg hover:bg-background transition-colors duration-150"> <span class="text-accent text-lg leading-none mt-0.5">🌳</span>
+                                                <div> <span class="text-[15px] font-medium text-text group-hover:text-primary transition-colors">Дендрология</span>
+                                                    <p class="text-xs text-muted mt-0.5">Подбор растений и посадочный план</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Column 2 -->
+                                <div>
+                                    <p class="text-xs font-semibold uppercase tracking-wider text-muted mb-4">Реализация &amp; Уход</p>
+                                    <ul class="space-y-2.5">
+                                        <li>
+                                            <a href="/service/landscaping" class="flex items-start gap-3 group py-1.5 -ml-2 px-2 rounded-lg hover:bg-background transition-colors duration-150"> <span class="text-accent text-lg leading-none mt-0.5">🏗️</span>
+                                                <div> <span class="text-[15px] font-medium text-text group-hover:text-primary transition-colors">Благоустройство территорий</span>
+                                                    <p class="text-xs text-muted mt-0.5">Полный цикл работ под ключ</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/service/auto-irrigation" class="flex items-start gap-3 group py-1.5 -ml-2 px-2 rounded-lg hover:bg-background transition-colors duration-150"> <span class="text-accent text-lg leading-none mt-0.5">💧</span>
+                                                <div> <span class="text-[15px] font-medium text-text group-hover:text-primary transition-colors">Системы автополива</span>
+                                                    <p class="text-xs text-muted mt-0.5">Проектирование и монтаж полива</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/service/garden-care" class="flex items-start gap-3 group py-1.5 -ml-2 px-2 rounded-lg hover:bg-background transition-colors duration-150"> <span class="text-accent text-lg leading-none mt-0.5">✂️</span>
+                                                <div> <span class="text-[15px] font-medium text-text group-hover:text-primary transition-colors">Уход за садом</span>
+                                                    <p class="text-xs text-muted mt-0.5">Регулярное обслуживание участков</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- All services link --><a href="/services" class="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-secondary hover:text-primary transition-colors group">
+                Все услуги
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+            </a> </div>
+                        <!-- Featured card -->
+                        <div class="col-span-4 bg-background rounded-r-2xl p-6 flex flex-col justify-between border-l border-border-soft">
+                            <div> <span class="inline-block px-3 py-1 bg-accent/20 text-accent-dark text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">Популярное</span>
+                                <h4 class="font-heading text-xl font-bold text-primary mb-2">Комплексное благоустройство</h4>
+                                <p class="text-sm text-muted leading-relaxed mb-4">Полный цикл — от проекта до реализации. Экономьте до 20% при заказе комплексного пакета услуг.</p>
+                            </div> <a href="/service/full-landscaping" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-dark hover:text-accent transition-colors">
+                Подробнее
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+            </a>
+                            <!-- Decorative element -->
+                            <div class="mt-4 h-24 rounded-xl bg-gradient-to-br from-primary/5 via-secondary/10 to-accent/15 flex items-center justify-center overflow-hidden">
+                                <div class="organic-blob w-16 h-16 bg-accent/25"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- === PROJECTS MEGA MENU === -->
+                <div id="projects-mega" class="absolute left-1/2 -translate-x-1/2 w-[min(900px,95vw)] bg-surface rounded-2xl shadow-2xl border border-border-soft p-0 opacity-0 invisible pointer-events-none transition-all duration-300 transform -translate-y-2 scale-[0.98]" style="top: 8px;">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <p class="text-xs font-semibold uppercase tracking-wider text-muted">Реализованные проекты</p> <a href="/projects" class="text-sm font-semibold text-secondary hover:text-primary transition-colors">Все проекты →</a> </div>
+                        <div class="grid grid-cols-3 gap-5">
+                            <!-- Project card 1 -->
+                            <a href="/projects/private-residence-grozny" class="group block">
+                                <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-primary/8 via-secondary/12 to-accent/10 mb-3 overflow-hidden relative">
+                                    <div class="absolute inset-0 flex items-center justify-center"> <span class="text-4xl">🏡</span> </div>
+                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/60 to-transparent p-3"> <span class="text-white text-xs font-medium">Частная резиденция</span> </div>
+                                </div>
+                                <p class="text-sm font-semibold text-text group-hover:text-primary transition-colors">Резиденция в Грозном</p>
+                                <p class="text-xs text-muted mt-1">Благоустройство 25 соток</p>
+                            </a>
+                            <!-- Project card 2 -->
+                            <a href="/projects/city-park" class="group block">
+                                <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-secondary/8 via-primary/12 to-accent/10 mb-3 overflow-hidden relative">
+                                    <div class="absolute inset-0 flex items-center justify-center"> <span class="text-4xl">🌳</span> </div>
+                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/60 to-transparent p-3"> <span class="text-white text-xs font-medium">Городской парк</span> </div>
+                                </div>
+                                <p class="text-sm font-semibold text-text group-hover:text-primary transition-colors">Парк им. Кадырова</p>
+                                <p class="text-xs text-muted mt-1">Озеленение 2 га территории</p>
+                            </a>
+                            <!-- Project card 3 -->
+                            <a href="/projects/restaurant-terrace" class="group block">
+                                <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-accent/8 via-primary/12 to-secondary/10 mb-3 overflow-hidden relative">
+                                    <div class="absolute inset-0 flex items-center justify-center"> <span class="text-4xl">🍽️</span> </div>
+                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/60 to-transparent p-3"> <span class="text-white text-xs font-medium">Ресторан</span> </div>
+                                </div>
+                                <p class="text-sm font-semibold text-text group-hover:text-primary transition-colors">Терраса «Le Jardin»</p>
+                                <p class="text-xs text-muted mt-1">Летняя терраса с водоемом</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- === CATALOG MEGA MENU === -->
+                <div id="catalog-mega" class="absolute left-1/2 -translate-x-1/2 w-[min(800px,95vw)] bg-surface rounded-2xl shadow-2xl border border-border-soft p-0 opacity-0 invisible pointer-events-none transition-all duration-300 transform -translate-y-2 scale-[0.98]" style="top: 8px;">
+                    <div class="p-8">
+                        <div class="grid grid-cols-3 gap-8">
+                            <!-- Plants -->
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-muted mb-4 flex items-center gap-2"> <span>🌱</span> Растения </p>
+                                <ul class="space-y-2">
+                                    <li><a href="/products?cat=trees" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Деревья и крупномеры</a></li>
+                                    <li><a href="/products?cat=conifers" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Хвойные растения</a></li>
+                                    <li><a href="/products?cat=shrubs" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Декоративные кустарники</a></li>
+                                    <li><a href="/products?cat=flowers" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Многолетние цветы</a></li>
+                                    <li><a href="/products?cat=roses" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Розы</a></li>
+                                </ul>
+                            </div>
+                            <!-- Materials -->
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-muted mb-4 flex items-center gap-2"> <span>🧱</span> Материалы </p>
+                                <ul class="space-y-2">
+                                    <li><a href="/products?cat=paving" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Тротуарная плитка</a></li>
+                                    <li><a href="/products?cat=stone" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Природный камень</a></li>
+                                    <li><a href="/products?cat=soil" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Грунты и мульча</a></li>
+                                    <li><a href="/products?cat=drainage" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Дренажные системы</a></li>
+                                </ul>
+                            </div>
+                            <!-- Decor -->
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-muted mb-4 flex items-center gap-2"> <span>🏺</span> Декор </p>
+                                <ul class="space-y-2">
+                                    <li><a href="/products?cat=pots" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Садовые вазоны</a></li>
+                                    <li><a href="/products?cat=sculptures" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Скульптуры и фигуры</a></li>
+                                    <li><a href="/products?cat=lighting" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Ландшафтное освещение</a></li>
+                                    <li><a href="/products?cat=fountains" class="text-[15px] text-text hover:text-primary transition-colors py-1 block">Фонтаны и водопады</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-5 border-t border-border-soft"> <a href="/products" class="inline-flex items-center gap-2 text-sm font-semibold text-secondary hover:text-primary transition-colors group">
+            Перейти в каталог
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+        </a> </div>
+                    </div>
+                </div>
+                <!-- === ABOUT DROPDOWN === -->
+                <div id="about-dropdown" class="absolute right-0 w-[280px] bg-surface rounded-2xl shadow-2xl border border-border-soft p-3 opacity-0 invisible pointer-events-none transition-all duration-300 transform -translate-y-2 scale-[0.98]" style="top: 8px; right: auto; left: auto;">
+                    <ul class="space-y-1">
+                        <li><a href="/about" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background transition-colors text-[15px] font-medium text-text hover:text-primary">🏢 О компании</a></li>
+                        <li><a href="/about#team" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background transition-colors text-[15px] font-medium text-text hover:text-primary">👥 Наша команда</a></li>
+                        <li><a href="/blog" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background transition-colors text-[15px] font-medium text-text hover:text-primary">📝 Статьи и блог</a></li>
+                        <li><a href="/events" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background transition-colors text-[15px] font-medium text-text hover:text-primary">🏆 События и выставки</a></li>
+                        <li><a href="/testimonials" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background transition-colors text-[15px] font-medium text-text hover:text-primary">⭐ Отзывы клиентов</a></li>
+                        <li><a href="/faq" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background transition-colors text-[15px] font-medium text-text hover:text-primary">❓ ЧАВО</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- ========== MOBILE MENU OVERLAY ========== -->
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-primary-dark/60 z-40 opacity-0 invisible transition-opacity duration-400 lg:hidden" aria-hidden="true"></div>
+        <!-- ========== MOBILE MENU PANEL ========== -->
+        <div id="mobile-menu-panel" class="fixed top-0 right-0 h-full w-[320px] max-w-[85vw] bg-surface z-50 transform translate-x-full transition-transform duration-400 ease-in-out lg:hidden overflow-y-auto shadow-2xl" aria-label="Мобильное меню">
+            <div class="flex flex-col h-full">
+                <!-- Mobile menu header -->
+                <div class="flex items-center justify-between p-5 border-b border-border-soft"> <span class="font-heading text-xl font-bold text-primary">Меню</span>
+                    <button id="mobile-menu-close" class="w-9 h-9 rounded-full flex items-center justify-center text-text hover:text-primary hover:bg-background transition-all" aria-label="Закрыть меню">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /> </svg>
+                    </button>
+                </div>
+                <!-- Mobile nav links -->
+                <nav class="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+                    <!-- Services accordion -->
+                    <div class="mobile-accordion">
+                        <button class="mobile-accordion-trigger w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[16px] font-semibold text-text hover:bg-background transition-colors"> <span class="flex items-center gap-3">🌿 Услуги</span>
+                            <svg class="w-4 h-4 text-muted transition-transform duration-300 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /> </svg>
+                        </button>
+                        <div class="mobile-accordion-content hidden pl-7 pr-4 pb-2 space-y-2"> <a href="/service/landscape-design" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Ландшафтное проектирование</a> <a href="/service/territory-planning" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Планировка территории</a> <a href="/service/landscaping" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Благоустройство</a> <a href="/service/auto-irrigation" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Системы автополива</a> <a href="/service/garden-care" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Уход за садом</a> <a href="/services" class="block py-2 text-[15px] font-semibold text-secondary hover:text-primary transition-colors">Все услуги →</a> </div>
+                    </div>
+                    <!-- Projects accordion -->
+                    <div class="mobile-accordion">
+                        <button class="mobile-accordion-trigger w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[16px] font-semibold text-text hover:bg-background transition-colors"> <span class="flex items-center gap-3">🏡 Проекты</span>
+                            <svg class="w-4 h-4 text-muted transition-transform duration-300 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /> </svg>
+                        </button>
+                        <div class="mobile-accordion-content hidden pl-7 pr-4 pb-2 space-y-2"> <a href="/projects?cat=private" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Частные резиденции</a> <a href="/projects?cat=commercial" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Коммерческие объекты</a> <a href="/projects?cat=urban" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Городские парки</a> <a href="/projects" class="block py-2 text-[15px] font-semibold text-secondary hover:text-primary transition-colors">Все проекты →</a> </div>
+                    </div>
+                    <!-- Catalog accordion -->
+                    <div class="mobile-accordion">
+                        <button class="mobile-accordion-trigger w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[16px] font-semibold text-text hover:bg-background transition-colors"> <span class="flex items-center gap-3">🛒 Каталог</span>
+                            <svg class="w-4 h-4 text-muted transition-transform duration-300 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /> </svg>
+                        </button>
+                        <div class="mobile-accordion-content hidden pl-7 pr-4 pb-2 space-y-2"> <a href="/products?cat=trees" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Растения</a> <a href="/products?cat=materials" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Материалы</a> <a href="/products?cat=decor" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Декор</a> <a href="/products" class="block py-2 text-[15px] font-semibold text-secondary hover:text-primary transition-colors">Весь каталог →</a> </div>
+                    </div>
+                    <!-- Simple links --><a href="/before-after" class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-[16px] font-semibold text-text hover:bg-background transition-colors">
+        📸 Галерея До &amp; После
+        </a>
+                    <!-- About accordion -->
+                    <div class="mobile-accordion">
+                        <button class="mobile-accordion-trigger w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[16px] font-semibold text-text hover:bg-background transition-colors"> <span class="flex items-center gap-3">ℹ️ О нас</span>
+                            <svg class="w-4 h-4 text-muted transition-transform duration-300 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /> </svg>
+                        </button>
+                        <div class="mobile-accordion-content hidden pl-7 pr-4 pb-2 space-y-2"> <a href="/about" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">О компании</a> <a href="/blog" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Статьи и блог</a> <a href="/events" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">События</a> <a href="/testimonials" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">Отзывы</a> <a href="/faq" class="block py-2 text-[15px] text-text hover:text-primary transition-colors">ЧАВО</a> </div>
+                    </div> <a href="/contact" class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-[16px] font-semibold text-text hover:bg-background transition-colors">
+        📍 Контакты
+        </a> </nav>
+                <!-- Mobile menu footer -->
+                <div class="p-5 border-t border-border-soft space-y-4">
+                    <a href="tel:+78001234567" class="flex items-center gap-3 text-sm font-medium text-text hover:text-primary transition-colors">
+                        <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /> </svg> +7 (800) 123-45-67 </a> <a href="/contact#form" class="block w-full text-center px-5 py-3 bg-accent hover:bg-accent-dark text-primary-dark font-semibold rounded-full transition-all duration-300 text-sm">
+        Заказать звонок
+        </a>
+                    <!-- Social links -->
+                    <div class="flex items-center justify-center gap-4 pt-2">
+                        <a href="https://t.me/sequoya" class="w-9 h-9 rounded-full bg-background flex items-center justify-center text-muted hover:text-white hover:bg-[#2AABEE] transition-all" aria-label="Telegram">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.26.332-.54.332-.352 0-.292-.133-.414-.472l-.94-3.086-2.668-.83c-.644-.2-.66-.644.136-.954l10.443-4.024c.476-.18.893.115.738.744z" />
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/sequoya" class="w-9 h-9 rounded-full bg-background flex items-center justify-center text-muted hover:text-white hover:bg-[#E4405F] transition-all" aria-label="Instagram">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                            </svg>
+                        </a>
+                        <a href="https://vk.com/sequoya" class="w-9 h-9 rounded-full bg-background flex items-center justify-center text-muted hover:text-white hover:bg-[#0077FF] transition-all" aria-label="VK">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M15.684 0H8.316C3.724 0 0 3.724 0 8.316v7.368C0 20.276 3.724 24 8.316 24h7.368C20.276 24 24 20.276 24 15.684V8.316C24 3.724 20.276 0 15.684 0zm3.692 17.123h-1.764c-.66 0-.862-.523-2.041-1.72-1.031-1.005-1.484-1.136-1.736-1.136-.355 0-.457.102-.457.596v1.575c0 .425-.136.68-1.268.68-1.87 0-3.947-1.137-5.407-3.24-2.211-3.14-2.817-5.495-2.817-5.978 0-.262.102-.51.594-.51h1.763c.443 0 .61.204.78.68.866 2.524 2.316 4.738 2.912 4.738.227 0 .33-.102.33-.663V9.86c-.073-1.194-.69-1.294-.69-1.72 0-.204.17-.408.443-.408h2.775c.374 0 .51.204.51.646v3.483c0 .373.17.51.272.51.228 0 .413-.136.826-.578 1.276-1.429 2.188-3.638 2.188-3.638.114-.255.286-.425.73-.425h1.763c.527 0 .646.272.527.663-.22.969-2.22 3.8-2.22 3.8-.178.288-.247.425 0 .747.178.254.763.754 1.152 1.213.713.832 1.26 1.534 1.412 2.006.153.467-.1.68-.56.68z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ========== SEARCH OVERLAY ========== -->
+        <div id="search-overlay" class="fixed inset-0 z-[60] opacity-0 invisible transition-all duration-300 pointer-events-none">
+            <div class="absolute inset-0 bg-primary-dark/70 search-backdrop"></div>
+            <div class="relative z-10 flex items-start justify-center pt-24 sm:pt-32 px-4">
+                <div class="w-full max-w-xl bg-surface rounded-2xl shadow-2xl p-6 sm:p-8 transform transition-all duration-400 scale-95" id="search-panel">
+                    <div class="flex items-center gap-3 pb-4 border-b-2 border-primary/20">
+                        <svg class="w-5 h-5 text-muted flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>
+                        <input type="text" id="search-input" placeholder="Поиск по сайту..." class="flex-1 text-lg font-medium text-text bg-transparent border-none outline-none placeholder:text-muted-light" autocomplete="off">
+                        <button id="search-close" class="w-8 h-8 rounded-full flex items-center justify-center text-muted hover:text-text hover:bg-background transition-all flex-shrink-0" aria-label="Закрыть поиск">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /> </svg>
+                        </button>
+                    </div>
+                    <div class="mt-4 text-sm text-muted">
+                        <p class="font-medium mb-2">Популярные запросы:</p>
+                        <div class="flex flex-wrap gap-2"> <a href="/services" class="px-3 py-1.5 bg-background rounded-full text-xs hover:bg-secondary/10 hover:text-secondary transition-colors">Ландшафтный дизайн</a> <a href="/service/auto-irrigation" class="px-3 py-1.5 bg-background rounded-full text-xs hover:bg-secondary/10 hover:text-secondary transition-colors">Автополив</a> <a href="/products?cat=trees" class="px-3 py-1.5 bg-background rounded-full text-xs hover:bg-secondary/10 hover:text-secondary transition-colors">Крупномеры</a> <a href="/projects" class="px-3 py-1.5 bg-background rounded-full text-xs hover:bg-secondary/10 hover:text-secondary transition-colors">Наши проекты</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>         
+    </header>
+
+    <main id="main-content">
+        <!-- Page Hero -->
+        <section class="relative bg-primary-dark py-20 md:py-24 overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+                <div class="absolute top-0 left-0 w-full h-full opacity-20" style="background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0); background-size: 40px 40px;"></div>
+                <div class="absolute top-20 right-10 w-64 h-64 rounded-full bg-accent/10 blur-3xl"></div>
+            </div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-sm font-semibold uppercase tracking-[0.25em] text-accent mb-4 block">Что мы предлагаем</span>
+                <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">Наши услуги</h1>
+                <p class="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed">
+                    Полный цикл работ по благоустройству и озеленению территорий — от идеи до регулярного ухода.
+                </p>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="py-16 md:py-24 bg-background">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service 1: Landscape Design -->
+                    <a href="/service/landscape-design" class="group block bg-surface rounded-2xl border border-border-soft p-6 md:p-8 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 animate-fade-in-up">
+                        <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-2xl mb-4 group-hover:bg-accent/20 transition-colors">🌿</div>
+                        <h3 class="font-heading text-2xl font-bold text-primary mb-3">Ландшафтное проектирование</h3>
+                        <p class="text-muted leading-relaxed text-sm">Индивидуальный дизайн-проект вашего участка с учетом всех особенностей рельефа и пожеланий. 3D-визуализация и подбор растений.</p>
+                        <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary transition-colors">
+                            Подробнее
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
+                    </a>
+
+                    <!-- Service 2: Territory Planning -->
+                    <a href="/service/territory-planning" class="group block bg-surface rounded-2xl border border-border-soft p-6 md:p-8 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
+                        <div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-2xl mb-4 group-hover:bg-secondary/20 transition-colors">📐</div>
+                        <h3 class="font-heading text-2xl font-bold text-primary mb-3">Планировка территории</h3>
+                        <p class="text-muted leading-relaxed text-sm">Функциональное зонирование и оптимальное размещение дорожек, площадок, зон отдыха и хозяйственных объектов.</p>
+                        <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary transition-colors">
+                            Подробнее
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
+                    </a>
+
+                    <!-- Service 3: Dendrology -->
+                    <a href="/service/dendrology" class="group block bg-surface rounded-2xl border border-border-soft p-6 md:p-8 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center text-2xl mb-4 group-hover:bg-primary/10 transition-colors">🌳</div>
+                        <h3 class="font-heading text-2xl font-bold text-primary mb-3">Дендрология</h3>
+                        <p class="text-muted leading-relaxed text-sm">Научный подход к подбору деревьев и кустарников. Посадочный план с учетом совместимости и климатических условий.</p>
+                        <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary transition-colors">
+                            Подробнее
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
+                    </a>
+
+                    <!-- Service 4: Landscaping -->
+                    <a href="/service/landscaping" class="group block bg-surface rounded-2xl border border-border-soft p-6 md:p-8 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.3s;">
+                        <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-2xl mb-4 group-hover:bg-accent/20 transition-colors">🏗️</div>
+                        <h3 class="font-heading text-2xl font-bold text-primary mb-3">Благоустройство территорий</h3>
+                        <p class="text-muted leading-relaxed text-sm">Полный цикл реализации: мощение, подпорные стены, водоемы, малые архитектурные формы. Работы «под ключ».</p>
+                        <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary transition-colors">
+                            Подробнее
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
+                    </a>
+
+                    <!-- Service 5: Auto Irrigation -->
+                    <a href="/service/auto-irrigation" class="group block bg-surface rounded-2xl border border-border-soft p-6 md:p-8 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-2xl mb-4 group-hover:bg-secondary/20 transition-colors">💧</div>
+                        <h3 class="font-heading text-2xl font-bold text-primary mb-3">Системы автополива</h3>
+                        <p class="text-muted leading-relaxed text-sm">Проектирование и монтаж умных систем орошения: капельный полив, дождевание, подземные магистрали.</p>
+                        <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary transition-colors">
+                            Подробнее
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
+                    </a>
+
+                    <!-- Service 6: Garden Care -->
+                    <a href="/service/garden-care" class="group block bg-surface rounded-2xl border border-border-soft p-6 md:p-8 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.5s;">
+                        <div class="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center text-2xl mb-4 group-hover:bg-primary/10 transition-colors">✂️</div>
+                        <h3 class="font-heading text-2xl font-bold text-primary mb-3">Уход за садом</h3>
+                        <p class="text-muted leading-relaxed text-sm">Регулярное обслуживание: стрижка газонов, обрезка, подкормки, защита от вредителей и болезней.</p>
+                        <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary transition-colors">
+                            Подробнее
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Banner -->
+        <section class="bg-primary py-12 md:py-16 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 right-0 w-72 h-72 bg-accent rounded-full blur-3xl"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-4">Не нашли нужную услугу?</h2>
+                <p class="text-white/70 text-lg mb-6">Мы практикуем индивидуальный подход. Свяжитесь с нами, и мы предложим решение под вашу задачу.</p>
+                <a href="/contact#form" class="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-primary-dark font-semibold rounded-full transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] shadow-lg">
+                    Обсудить проект
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer loaded dynamically -->
+    <footer class="relative bg-primary-dark text-white/80 pt-16 md:pt-20 pb-8" aria-labelledby="footer-heading">
+        <!-- Subtle top decorative line with accent -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent/80 via-secondary/60 to-accent/80"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 id="footer-heading" class="sr-only">Подвал сайта</h2>
+
+            <!-- Main footer grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12 mb-12 md:mb-16">
+                <!-- Column 1: Brand & description & social -->
+                <div class="col-span-2 lg:col-span-1">
+                    <!-- Logo -->
+                    <a href="/" class="inline-flex items-center gap-2.5 group mb-6">
+                        <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent group-hover:bg-accent/30 transition-colors">
+                            <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 2 L16 30 M16 6 C20 2 26 4 26 10 C26 16 20 18 16 22 M16 6 C12 2 6 4 6 10 C6 16 12 18 16 22 M16 22 L16 30 M10 26 L22 26" />
+                            </svg>
+                        </div>
+                        <span class="font-heading text-xl font-bold text-white tracking-tight">Секвойя</span>
+                    </a>
+                    <p class="text-sm text-white/60 leading-relaxed mb-6 max-w-xs">
+                        Архитектура ландшафта с 2010 года. Создаём красоту и гармонию на территориях любого масштаба.
+                    </p>
+                    <!-- Social links -->
+                    <div class="flex items-center gap-3">
+                        <a href="https://t.me/sequoya" target="_blank" rel="noopener noreferrer" 
+                            class="w-9 h-9 rounded-full bg-white/10 hover:bg-[#2AABEE] flex items-center justify-center text-white/70 hover:text-white transition-all duration-200"
+                            aria-label="Telegram">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.26.332-.54.332-.352 0-.292-.133-.414-.472l-.94-3.086-2.668-.83c-.644-.2-.66-.644.136-.954l10.443-4.024c.476-.18.893.115.738.744z"/></svg>
+                        </a>
+                        <a href="https://vk.com/sequoya" target="_blank" rel="noopener noreferrer"
+                            class="w-9 h-9 rounded-full bg-white/10 hover:bg-[#0077FF] flex items-center justify-center text-white/70 hover:text-white transition-all duration-200"
+                            aria-label="VK">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M15.684 0H8.316C3.724 0 0 3.724 0 8.316v7.368C0 20.276 3.724 24 8.316 24h7.368C20.276 24 24 20.276 24 15.684V8.316C24 3.724 20.276 0 15.684 0zm3.692 17.123h-1.764c-.66 0-.862-.523-2.041-1.72-1.031-1.005-1.484-1.136-1.736-1.136-.355 0-.457.102-.457.596v1.575c0 .425-.136.68-1.268.68-1.87 0-3.947-1.137-5.407-3.24-2.211-3.14-2.817-5.495-2.817-5.978 0-.262.102-.51.594-.51h1.763c.443 0 .61.204.78.68.866 2.524 2.316 4.738 2.912 4.738.227 0 .33-.102.33-.663V9.86c-.073-1.194-.69-1.294-.69-1.72 0-.204.17-.408.443-.408h2.775c.374 0 .51.204.51.646v3.483c0 .373.17.51.272.51.228 0 .413-.136.826-.578 1.276-1.429 2.188-3.638 2.188-3.638.114-.255.286-.425.73-.425h1.763c.527 0 .646.272.527.663-.22.969-2.22 3.8-2.22 3.8-.178.288-.247.425 0 .747.178.254.763.754 1.152 1.213.713.832 1.26 1.534 1.412 2.006.153.467-.1.68-.56.68z"/></svg>
+                        </a>
+                        <a href="https://youtube.com/@sequoya" target="_blank" rel="noopener noreferrer"
+                            class="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FF0000] flex items-center justify-center text-white/70 hover:text-white transition-all duration-200"
+                            aria-label="YouTube">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                        <a href="https://instagram.com/sequoya" target="_blank" rel="noopener noreferrer"
+                            class="w-9 h-9 rounded-full bg-white/10 hover:bg-[#E4405F] flex items-center justify-center text-white/70 hover:text-white transition-all duration-200"
+                            aria-label="Instagram">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Services -->
+                <div>
+                    <h3 class="font-heading text-base font-bold text-white mb-4">Услуги</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="/service/landscape-design" class="text-sm text-white/60 hover:text-accent transition-colors">Ландшафтное проектирование</a></li>
+                        <li><a href="/service/landscaping" class="text-sm text-white/60 hover:text-accent transition-colors">Благоустройство территорий</a></li>
+                        <li><a href="/service/greening" class="text-sm text-white/60 hover:text-accent transition-colors">Озеленение</a></li>
+                        <li><a href="/service/auto-irrigation" class="text-sm text-white/60 hover:text-accent transition-colors">Системы автополива</a></li>
+                        <li><a href="/service/garden-care" class="text-sm text-white/60 hover:text-accent transition-colors">Уход за садом</a></li>
+                        <li><a href="/services" class="text-sm text-accent hover:text-accent-light transition-colors font-medium">Все услуги →</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Projects & Catalog -->
+                <div>
+                    <h3 class="font-heading text-base font-bold text-white mb-4">Проекты и Каталог</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="/projects" class="text-sm text-white/60 hover:text-accent transition-colors">Реализованные проекты</a></li>
+                        <li><a href="/before-after" class="text-sm text-white/60 hover:text-accent transition-colors">Галерея До & После</a></li>
+                        <li><a href="/products" class="text-sm text-white/60 hover:text-accent transition-colors">Каталог товаров</a></li>
+                        <li><a href="/products?cat=plants" class="text-sm text-white/60 hover:text-accent transition-colors">Растения</a></li>
+                        <li><a href="/products?cat=materials" class="text-sm text-white/60 hover:text-accent transition-colors">Материалы</a></li>
+                        <li><a href="/products?cat=decor" class="text-sm text-white/60 hover:text-accent transition-colors">Декор</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Company -->
+                <div>
+                    <h3 class="font-heading text-base font-bold text-white mb-4">Компания</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="/about" class="text-sm text-white/60 hover:text-accent transition-colors">О компании</a></li>
+                        <li><a href="/blog" class="text-sm text-white/60 hover:text-accent transition-colors">Статьи и блог</a></li>
+                        <li><a href="/events" class="text-sm text-white/60 hover:text-accent transition-colors">События</a></li>
+                        <li><a href="/testimonials" class="text-sm text-white/60 hover:text-accent transition-colors">Отзывы</a></li>
+                        <li><a href="/faq" class="text-sm text-white/60 hover:text-accent transition-colors">ЧАВО</a></li>
+                        <li><a href="/contact" class="text-sm text-white/60 hover:text-accent transition-colors">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 5: Newsletter (spans full width on md or separate column) -->
+                <div class="col-span-2 md:col-span-4 lg:col-span-1 lg:col-start-5 mt-6 lg:mt-0">
+                    <h3 class="font-heading text-base font-bold text-white mb-4">Рассылка</h3>
+                    <p class="text-sm text-white/60 mb-4">Подпишитесь на полезные советы и акции</p>
+                    <form class="flex flex-col gap-3" id="newsletter-form">
+                        <input type="email" placeholder="Ваш email" required
+                                class="w-full bg-white/10 border border-white/20 rounded-full px-4 py-2.5 text-sm text-white placeholder:text-white/40 outline-none focus:border-accent focus:bg-white/15 transition-colors">
+                        <button type="submit"
+                                class="w-full px-6 py-2.5 bg-accent hover:bg-accent-light text-primary-dark font-semibold text-sm rounded-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/20">
+                            Подписаться
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <!-- Copyright -->
+                <div class="text-sm text-white/40">
+                    © 2025 Секвойя. Все права защищены.
+                </div>
+                <!-- Legal links -->
+                <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/50">
+                    <a href="/privacy" class="hover:text-white/80 transition-colors">Политика конфиденциальности</a>
+                    <a href="/terms" class="hover:text-white/80 transition-colors">Условия использования</a>
+                    <a href="/sitemap" class="hover:text-white/80 transition-colors">Карта сайта</a>
+                </div>
+                <!-- Developer credit -->
+                <div class="text-sm text-white/30">
+                    Разработано <a href="https://groznet.com" target="_blank" rel="noopener noreferrer" class="text-white/50 hover:text-accent transition-colors underline underline-offset-2">GrozNet</a>
+                </div>
+            </div>
+        </div>        
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/load-components.js" defer></script>
+</body>
+</html>
